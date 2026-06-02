@@ -260,3 +260,15 @@ nav {
     box-shadow: 0 0 40px 15px rgba(200, 169, 110, 0.06);
   }
    
+  /* Placeholder floating artwork tiles (shown before JS loads real images) */
+.artwork-float {
+    position: absolute;
+    border-radius: 2px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: opacity 0.4s ease;
+  }
+   
+  .artwork-float:hover {
+    transform: translateY(-6px) scale(1.03) !important;
+  }
