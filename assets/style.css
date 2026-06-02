@@ -157,4 +157,12 @@ nav {
     background: currentColor;
     display: block;
   }
-   
+
+  /* ============================================================
+   HOME SECTION
+============================================================ */
+ 
+#home {
+    background: #05040a url('../images/Untitled_Artwork_244.jpg') center center / cover no-repeat;
+    overflow: hidden;
+  }
