@@ -227,3 +227,10 @@ nav {
     height: 46px;
     fill: rgba(232, 228, 220, 0.9);
   }
+
+  /* Year label — top right of header */
+.home-year {
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 2px;
+  }
