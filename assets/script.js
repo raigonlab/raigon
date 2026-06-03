@@ -33,6 +33,27 @@ const artworks = [
     { src: "assets/images/hero/digital-charcoal-00019.jpg", title: "Torsion",   series: "carvão digital", year: "2023" },
   ];
 
+  const pills = document.querySelectorAll('.pill');
+const pages = document.querySelectorAll('.page');
+
+pills.forEach(pill => {
+  pill.addEventListener('click', () => {
+    const target = pill.dataset.page;
+
+    pages.forEach(p => p.classList.remove('active'));
+    pills.forEach(p => p.classList.remove('active'));
+
+    document.getElementById(target).classList.add('active');
+    pill.classList.add('active');
+
+    document.getElementById(target).scrollTop = 0;
+
+    if (target === 'vault') {
+      initTopo();
+    }
+  });
+});
+
   
 /* ============================================================
    HOME GALLERY — PARALLAX BUILD
