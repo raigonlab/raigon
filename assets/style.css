@@ -342,3 +342,13 @@ nav {
    
   .layer-1 { top: 8%;  height: 20%; }
   .layer-2 { top: 51%; height: 14%; }
+
+  /* Individual artwork card */
+.artwork-card {
+    flex-shrink: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
+    height: 100%;
+  }
