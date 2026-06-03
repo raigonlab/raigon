@@ -300,3 +300,28 @@ nav {
 .float-6 { width: 80px;  height: 105px; top: 35%;   right: 3%;   animation: fl3 8.5s ease-in-out infinite; }
 .float-7 { width: 100px; height: 130px; bottom: 15%; left: 12%;  animation: fl1 9s   ease-in-out infinite; }
 .float-8 { width: 120px; height: 90px;  bottom: 12%; right: 15%; animation: fl2 7.5s ease-in-out infinite reverse; }
+
+/* Placeholder background gradients — warm tones to suggest artwork */
+.ap-1 { background: linear-gradient(135deg, #1a1a18, #2d2820, #1a1714); }
+.ap-1::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 40% 60%, rgba(180,140,80,.3), transparent 60%); }
+ 
+.ap-2 { background: linear-gradient(160deg, #0f1a1a, #1a2d2a, #0a1210); }
+.ap-2::after { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 60% 40%, rgba(80,160,140,.2), transparent 55%); }
+ 
+.ap-3 { background: linear-gradient(110deg, #1a1218, #2a1a22, #120e14); }
+.ap-3::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, rgba(180,100,140,.25), transparent 60%); }
+ 
+.ap-4 { background: linear-gradient(170deg, #181410, #2a2218, #161210); }
+.ap-4::after { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 30% 70%, rgba(200,160,80,.2), transparent 50%); }
+ 
+.ap-5 { background: linear-gradient(140deg, #0e0e1a, #181828, #0a0a12); }
+.ap-5::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 65% 35%, rgba(100,100,220,.2), transparent 55%); }
+ 
+.ap-6 { background: linear-gradient(120deg, #1a1410, #281e14, #141008); }
+.ap-6::after { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 45% 55%, rgba(220,170,90,.2), transparent 55%); }
+ 
+.ap-7 { background: linear-gradient(155deg, #100e18, #1c1828, #0c0a10); }
+.ap-7::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 55% 45%, rgba(140,110,200,.22), transparent 58%); }
+ 
+.ap-8 { background: linear-gradient(125deg, #101614, #182420, #0c1210); }
+.ap-8::after { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 40% 60%, rgba(90,180,150,.2), transparent 55%); }
