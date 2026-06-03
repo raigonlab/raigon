@@ -121,6 +121,41 @@ window.addEventListener('load', () => {
       scrollBar.appendChild(scrollThumb);
       scene.appendChild(scrollBar);
 
+      // Mouse and drag controls for parallax gallery interaction
+
+      scene.addEventListener('mousemove', e => {
+        mouseX = (e.clientX - W / 2) / (W / 2);
+      });
+      scene.addEventListener('mouseleave', () => { mouseX = 0; });
+    
+      let isDragging  = false;
+      let dragStartX  = 0;
+      let dragOffsets = [0, -285];
+    
+      scene.addEventListener('mousedown', e => {
+        isDragging  = true;
+        dragStartX  = e.clientX;
+        dragOffsets = [...offsets];
+      });
+    
+      window.addEventListener('mouseup', () => { isDragging = false; });
+    
+      window.addEventListener('mousemove', e => {
+        if (!isDragging) { return; }
+        const dx = e.clientX - dragStartX;
+        layers.forEach((_, i) => {
+          targetOffsets[i] = dragOffsets[i] + dx * (1 - i * 0.15);
+        });
+      });
+    
+      scene.addEventListener('wheel', e => {
+        e.preventDefault();
+        const delta = e.deltaY || e.deltaX;
+        layers.forEach((_, i) => {
+          targetOffsets[i] -= delta * (1 - i * 0.15);
+        });
+      }, { passive: false });
+
    /* --- Build each layer --- 
    rows.forEach((row, ri) => {
     const layer = document.createElement('div');
