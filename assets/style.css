@@ -272,3 +272,14 @@ nav {
   .artwork-float:hover {
     transform: translateY(-6px) scale(1.03) !important;
   }
+  
+  /* Inset border overlay on each placeholder tile */
+.artwork-float::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    z-index: 2;
+    pointer-events: none;
+    border-radius: 2px;
+  }
