@@ -225,7 +225,8 @@ nav {
 .logo-icon-svg {
     width: 46px;
     height: 46px;
-    fill: rgba(232, 228, 220, 0.9);
+    fill: #ffffff;
+    transform: translateY(-8px);
   }
 
   /* Year label — top right of header */
