@@ -226,7 +226,7 @@ nav {
     width: 46px;
     height: 46px;
     fill: #ffffff;
-    transform: translateY(-8px);
+    transform: none;
   }
 
   /* Year label — top right of header */
