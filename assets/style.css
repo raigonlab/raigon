@@ -644,3 +644,5 @@ canvas#topo {
     opacity: 0;
     transition: opacity 0.4s;
   }
+
+  .sym-btn:hover .sym-glow { opacity: 1; }
