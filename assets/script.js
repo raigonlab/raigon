@@ -416,6 +416,32 @@ function showModal(idx) {
   
   // vault section 
 
+  /* ============================================================
+   TOPOGRAPHIC CANVAS ANIMATION
+   Draws animated sinusoidal noise curves on the Vault canvas.
+   Reacts to mouse position — curves deform toward the cursor.
+   Initialised lazily on first visit to the Vault section.
+============================================================ */
+let topoInit = false;
+ 
+// Separate mouse tracking variables for the canvas
+// (avoid conflict with gallery mouseX which is scoped inside the load event)
+let topoMouseX = 0.5;
+let topoMouseY = 0.5;
+let topoTargetX = 0.5;
+let topoTargetY = 0.5;
+ 
+function initTopo() {
+
+   // Guard — run only once
+   if (topoInit) { return; }
+   topoInit = true;
+  
+   const canvas = document.getElementById('topo');
+   const ctx    = canvas.getContext('2d');
+
+  });
+
 
 
 
