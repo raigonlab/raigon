@@ -440,6 +440,15 @@ function initTopo() {
    const canvas = document.getElementById('topo');
    const ctx    = canvas.getContext('2d');
 
+   const canvas = document.getElementById('topo');
+   const ctx    = canvas.getContext('2d');
+  
+   /* Resize canvas to match its CSS display size */
+   function resizeCanvas() {
+     canvas.width  = canvas.offsetWidth;
+     canvas.height = canvas.offsetHeight;
+   }
+
   });
 
 
