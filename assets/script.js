@@ -248,6 +248,7 @@ function showModal(idx) {
   modalInquireMsg.value = `Hello, I'm interested in "${art.title}" (${art.year}) from the ${art.series} series. Could you please provide more information about this work, including availability and pricing?`;
 
   modalSide.classList.remove('inquire-open');
+  resetInquirePanel();
   artworkModal.classList.add('open');
   artworkModal.setAttribute('aria-hidden', 'false');
 }
@@ -269,7 +270,10 @@ document.getElementById('modal-prev').addEventListener('click', () => showModal(
 document.getElementById('modal-next').addEventListener('click', () => showModal((currentIdx + 1) % artworks.length));
 artworkModal.addEventListener('click', e => { if (e.target === artworkModal) closeModal(); });
 document.getElementById('modal-inquire-link').addEventListener('click', () => modalSide.classList.add('inquire-open'));
-document.getElementById('modal-inquire-back').addEventListener('click', () => modalSide.classList.remove('inquire-open'));
+document.getElementById('modal-inquire-back').addEventListener('click', () => {
+  modalSide.classList.remove('inquire-open');
+  resetInquirePanel();
+});
 /* submit handled by the FORM VALIDATION section below */
 document.addEventListener('keydown', onModalKey);
   
@@ -515,24 +519,30 @@ function attachLiveValidation(field, rules) {
   });
 }
 
-/* Render a success message after the form, then fade it out after 4 s.
-   Resets the form so it is ready for another submission. */
-function showSuccess(form, message) {
-  // Remove any previous success message before adding a new one
-  const existing = form.parentElement.querySelector('.form-success');
-  if (existing) { existing.remove(); }
-
-  const success = document.createElement('p');
-  success.className   = 'form-success';
-  success.textContent = message;
-  form.after(success);
-
-  setTimeout(() => {
-    success.style.opacity = '0';
-    setTimeout(() => success.remove(), 600);
-  }, 4000);
-
+/* Show the centered overlay for the Arquive contact form.
+   The user decides when to close it — no auto-dismiss. */
+function showContactSuccess(form) {
+  const overlay = document.getElementById('contact-success-overlay');
+  overlay.classList.add('open');
+  overlay.setAttribute('aria-hidden', 'false');
   form.reset();
+}
+
+/* Transition the inquire panel into its success state.
+   The form content is hidden via CSS; the back button restores it. */
+function showInquireSuccess(form) {
+  const panel = document.querySelector('.modal-inquire-panel');
+  panel.classList.add('inquiry-sent');
+  document.getElementById('modal-inquire-success').setAttribute('aria-hidden', 'false');
+  form.reset();
+}
+
+/* Reset the inquire panel back to its default form state.
+   Called when the user navigates back or opens a new artwork. */
+function resetInquirePanel() {
+  const panel = document.querySelector('.modal-inquire-panel');
+  panel.classList.remove('inquiry-sent');
+  document.getElementById('modal-inquire-success').setAttribute('aria-hidden', 'true');
 }
 
 /* ── Arquive contact form ───────────────────────────────────────────── */
@@ -577,8 +587,23 @@ function showSuccess(form, message) {
     ].every(Boolean);
 
     if (isValid) {
-      showSuccess(form, 'Message sent — thank you, we\'ll be in touch soon.');
+      showContactSuccess(form);
     }
+  });
+
+  // Close overlay: × button, backdrop click, or Escape key
+  const overlay  = document.getElementById('contact-success-overlay');
+  const closeBtn = document.getElementById('contact-success-close');
+
+  function closeContactSuccess() {
+    overlay.classList.remove('open');
+    overlay.setAttribute('aria-hidden', 'true');
+  }
+
+  closeBtn.addEventListener('click', closeContactSuccess);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeContactSuccess(); });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && overlay.classList.contains('open')) closeContactSuccess();
   });
 })();
 
@@ -616,7 +641,7 @@ function showSuccess(form, message) {
     ].every(Boolean);
 
     if (isValid) {
-      showSuccess(form, 'Inquiry sent — we\'ll be in touch soon.');
+      showInquireSuccess(form);
     }
   });
 })();

@@ -243,6 +243,16 @@
 
 
 
+  <!-- Contact form success overlay — user dismisses it via the × button -->
+  <div class="contact-success-overlay" id="contact-success-overlay" aria-hidden="true">
+    <div class="contact-success-panel" role="dialog" aria-modal="true" aria-label="Message sent">
+      <button class="contact-success-close" id="contact-success-close" aria-label="Close">&#x2715;</button>
+      <div class="contact-success-line"></div>
+      <div class="contact-success-title">Thank you.</div>
+      <p class="contact-success-message">Your message has been received.<br>We'll be in touch with you shortly.</p>
+    </div>
+  </div>
+
   <!-- Artwork modal overlay — content populated by script.js -->
   <div class="artwork-modal" id="artwork-modal" aria-hidden="true">
     <button class="modal-close" id="modal-close" aria-label="Close">&#x2715;</button>
@@ -282,6 +292,13 @@
             </div>
             <button class="modal-inquire-submit" type="submit">Send inquiry</button>
           </form>
+
+          <!-- Success state — replaces form content after submission -->
+          <div class="modal-inquire-success" id="modal-inquire-success" aria-hidden="true">
+            <div class="modal-inquire-success-label">Inquiry sent</div>
+            <div class="modal-inquire-success-title">Thank you.</div>
+            <p class="modal-inquire-success-text">We'll be in touch<br>with you shortly.</p>
+          </div>
         </div>
 
       </div>

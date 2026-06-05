@@ -1279,9 +1279,10 @@ canvas#topo {
 
 /* ============================================================
    FORM VALIDATION STATES
-   Shared between the Arquive contact form and the modal
-   inquire form. Injected by the FORM VALIDATION section in
-   script.js — no HTML markup needed.
+   Error styles are shared between both forms.
+   Success states are form-specific:
+     - .contact-success-overlay  → centered overlay (Arquive form)
+     - .modal-inquire-success     → inline panel state (inquire form)
 ============================================================ */
 
 /* Inline error message rendered after an invalid field */
@@ -1300,14 +1301,124 @@ canvas#topo {
   border-color: rgba(220, 90, 70, 0.45) !important;
 }
 
-/* Success confirmation rendered after the form */
-.form-success {
+/* ── Contact form success overlay ───────────────────────────────────── */
+/* Full-screen overlay — user closes it via the × button */
+.contact-success-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: rgba(4, 3, 10, 0.65);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+.contact-success-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.contact-success-panel {
+  position: relative;
+  background: rgba(14, 14, 18, 0.98);
+  border: 1px solid rgba(232, 228, 220, 0.08);
+  border-radius: 4px;
+  padding: 56px 72px 52px;
+  text-align: center;
+  max-width: 360px;
+  width: 90%;
+  transform: translateY(10px);
+  transition: transform 0.4s ease;
+}
+.contact-success-overlay.open .contact-success-panel {
+  transform: translateY(0);
+}
+
+.contact-success-close {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  background: none;
+  border: none;
+  color: rgba(232, 228, 220, 0.22);
+  font-size: 14px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  padding: 4px;
+}
+.contact-success-close:hover { color: rgba(232, 228, 220, 0.7); }
+
+.contact-success-line {
+  width: 24px;
+  height: 1px;
+  background: rgba(232, 228, 220, 0.15);
+  margin: 0 auto 28px;
+}
+
+.contact-success-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 38px;
+  font-style: italic;
+  font-weight: 300;
+  color: rgba(232, 228, 220, 0.92);
+  margin-bottom: 18px;
+  line-height: 1;
+}
+
+.contact-success-message {
   font-family: 'Syne', sans-serif;
-  font-size: 8px;
-  letter-spacing: 3px;
+  font-size: 9px;
+  letter-spacing: 2px;
   text-transform: uppercase;
-  color: rgba(122, 168, 208, 0.8);
-  margin-top: 14px;
-  transition: opacity 0.6s ease;
+  line-height: 2.2;
+  color: rgba(232, 228, 220, 0.32);
+}
+
+/* ── Inquire panel success state ─────────────────────────────────────── */
+/* Hidden by default; shown when .modal-inquire-panel has .inquiry-sent */
+.modal-inquire-success {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.modal-inquire-panel.inquiry-sent .modal-inquire-heading,
+.modal-inquire-panel.inquiry-sent .modal-inquire-artwork-name,
+.modal-inquire-panel.inquiry-sent .modal-inquire-form {
+  display: none;
+}
+
+.modal-inquire-panel.inquiry-sent .modal-inquire-success {
+  display: flex;
+}
+
+.modal-inquire-success-label {
+  font-size: 8px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: rgba(122, 168, 208, 0.6);
+  margin-bottom: 12px;
+}
+
+.modal-inquire-success-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-style: italic;
+  font-weight: 300;
+  color: rgba(232, 228, 220, 0.92);
+  margin-bottom: 14px;
+  line-height: 1;
+}
+
+.modal-inquire-success-text {
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  line-height: 2.2;
+  color: rgba(232, 228, 220, 0.28);
 }
    
