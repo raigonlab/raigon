@@ -66,8 +66,43 @@
     VAULT SECTION
   ============================================================ -->
   <div class="page" id="vault">
-    <div class="vault-wrap">
-      <!-- content goes here -->
+    <div class="vault-scene">
+
+      <canvas id="topo"></canvas>
+
+      <div class="vault-title-overlay">
+        <span>collections</span>
+      </div>
+
+      <div class="vault-symbols">
+
+        <!-- Collection 1 -->
+        <button class="sym-btn">
+          <div class="sym-glow"></div>
+          <img class="sym-img" src="assets/images/hero/digital-charcoal-00001.jpg" alt="Digital Charcoal">
+          <span class="sym-label">digital charcoal</span>
+        </button>
+
+        <!-- Collection 2 -->
+        <button class="sym-btn">
+          <div class="sym-glow"></div>
+          <img class="sym-img" src="assets/images/hero/digital-charcoal-00009.jpg" alt="Form and Void">
+          <span class="sym-label">form and void</span>
+        </button>
+
+        <!-- Coming soon -->
+        <button class="sym-btn" disabled style="opacity:0.35; cursor:default;">
+          <div class="sym-glow"></div>
+          <div class="sym-img" style="display:flex;align-items:center;justify-content:center;">
+            <span style="font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:3px;color:rgba(232,228,220,0.4);text-transform:uppercase;">coming soon</span>
+          </div>
+          <span class="sym-label">— —</span>
+        </button>
+
+      </div>
+
+      <div class="vault-feedback"></div>
+
     </div>
   </div>
   <!-- End vault section -->
