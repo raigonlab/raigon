@@ -475,6 +475,38 @@ if (document.getElementById('vault').classList.contains('active')) {
   initTopo();
 }
 
+/* ============================================================
+   BIO MODAL
+============================================================ */
+(function () {
+  const overlay  = document.getElementById('bio-modal-overlay');
+  const openBtn  = document.getElementById('bio-open-btn');
+  const closeBtn = document.getElementById('bio-modal-close');
+
+  function openBioModal() {
+    overlay.setAttribute('aria-hidden', 'false');
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeBioModal() {
+    overlay.classList.remove('open');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  openBtn.addEventListener('click', openBioModal);
+  closeBtn.addEventListener('click', closeBioModal);
+
+  overlay.addEventListener('click', function (e) {
+    if (e.target === overlay) closeBioModal();
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && overlay.classList.contains('open')) closeBioModal();
+  });
+})();
+
 
 
 
