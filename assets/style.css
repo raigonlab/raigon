@@ -734,6 +734,69 @@ canvas#topo {
   color: rgba(232, 228, 220, 0.7);
 }
 
+/* Contact form */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.cf-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cf-label {
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.cf-input {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 10px 14px;
+  color: var(--text);
+  font-family: 'Syne', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  outline: none;
+  transition: border-color 0.2s;
+  width: 100%;
+}
+
+.cf-input::placeholder { color: rgba(232, 228, 220, 0.2); }
+.cf-input:focus { border-color: rgba(232, 228, 220, 0.25); }
+
+.cf-textarea {
+  resize: none;
+  height: 90px;
+}
+
+.cf-submit {
+  align-self: flex-start;
+  background: none;
+  border: 1px solid rgba(232, 228, 220, 0.2);
+  border-radius: 100px;
+  padding: 9px 28px;
+  color: rgba(232, 228, 220, 0.6);
+  font-family: 'Syne', sans-serif;
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cf-submit:hover {
+  border-color: rgba(232, 228, 220, 0.5);
+  color: var(--text);
+}
+
 .arquive-address {
   margin-top: 20px;
   font-size: 10px;
