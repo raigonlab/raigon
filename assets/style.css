@@ -185,7 +185,7 @@ nav {
     pointer-events: none;
     border-radius: 50%;
     backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(5px);
   }
 
   /* Square wrapper that holds both the rotating ring and the centre icon */
@@ -336,13 +336,14 @@ nav {
     position: absolute;
     display: flex;
     align-items: center;
-    gap: 380px;
+    gap: 494px;
     padding: 0 100px;
     will-change: transform;
   }
    
-  .layer-1 { top: 8%;  height: 20%; }
-  .layer-2 { top: 51%; height: 14%; }
+  .layer-1 { top: 24%; height: 18%; }
+  .layer-2 { top: 48%; height: 16%; }
+  .layer-3 { top: 70%; height: 14%; }
 
   /* Individual artwork card */
 .artwork-card {
