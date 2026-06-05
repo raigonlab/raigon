@@ -270,7 +270,7 @@ document.getElementById('modal-next').addEventListener('click', () => showModal(
 artworkModal.addEventListener('click', e => { if (e.target === artworkModal) closeModal(); });
 document.getElementById('modal-inquire-link').addEventListener('click', () => modalSide.classList.add('inquire-open'));
 document.getElementById('modal-inquire-back').addEventListener('click', () => modalSide.classList.remove('inquire-open'));
-modalInquireForm.addEventListener('submit', e => e.preventDefault());
+/* submit handled by the FORM VALIDATION section below */
 document.addEventListener('keydown', onModalKey);
   
 /* ============================================================
@@ -450,6 +450,176 @@ function initTopo() {
 if (document.getElementById('vault').classList.contains('active')) {
   initTopo();
 }
+
+/* ============================================================
+   FORM VALIDATION
+   Covers two forms:
+     1. Arquive contact form  (#cf-name, #cf-email, #cf-phone, #cf-message)
+     2. Modal inquire form    (#inquire-name-input, #inquire-email-input,
+                               #inquire-message-input)
+
+   Design:
+   - validateField()        — runs rules against one field, renders/clears error
+   - attachLiveValidation() — wires input events so errors clear as user types
+   - showSuccess()          — injects a confirmation message, resets the form
+   No alert(), no console.log(), no external libraries.
+============================================================ */
+
+/* Simplified RFC 5322 email pattern — catches the vast majority of typos */
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+/* Inject an error <span> directly after the field.
+   Re-uses the same node if one already exists (avoids duplicates). */
+function showFieldError(field, message) {
+  let error = field.parentElement.querySelector('.field-error');
+  if (!error) {
+    error = document.createElement('span');
+    error.className = 'field-error';
+    field.after(error);
+  }
+  error.textContent = message;
+  field.classList.add('field-invalid');
+}
+
+/* Remove the error node and invalid style from a field. */
+function clearFieldError(field) {
+  const error = field.parentElement.querySelector('.field-error');
+  if (error) { error.remove(); }
+  field.classList.remove('field-invalid');
+}
+
+/* Run an ordered array of rule objects against one field.
+   Each rule: { test: value => boolean, message: string }
+   Stops at the first failing rule and shows its message.
+   Returns true only when all rules pass. */
+function validateField(field, rules) {
+  const value = field.value.trim();
+  for (const rule of rules) {
+    if (!rule.test(value)) {
+      showFieldError(field, rule.message);
+      return false;
+    }
+  }
+  clearFieldError(field);
+  return true;
+}
+
+/* Wire an input listener so errors disappear as the user corrects the field.
+   Only re-validates while the field is in an invalid state to avoid
+   showing errors before the user has had a chance to type. */
+function attachLiveValidation(field, rules) {
+  field.addEventListener('input', () => {
+    if (field.classList.contains('field-invalid')) {
+      validateField(field, rules);
+    }
+  });
+}
+
+/* Render a success message after the form, then fade it out after 4 s.
+   Resets the form so it is ready for another submission. */
+function showSuccess(form, message) {
+  // Remove any previous success message before adding a new one
+  const existing = form.parentElement.querySelector('.form-success');
+  if (existing) { existing.remove(); }
+
+  const success = document.createElement('p');
+  success.className   = 'form-success';
+  success.textContent = message;
+  form.after(success);
+
+  setTimeout(() => {
+    success.style.opacity = '0';
+    setTimeout(() => success.remove(), 600);
+  }, 4000);
+
+  form.reset();
+}
+
+/* ── Arquive contact form ───────────────────────────────────────────── */
+(function () {
+  const form = document.querySelector('.contact-form');
+  if (!form) { return; }
+
+  const cfName    = document.getElementById('cf-name');
+  const cfEmail   = document.getElementById('cf-email');
+  const cfPhone   = document.getElementById('cf-phone');
+  const cfMessage = document.getElementById('cf-message');
+
+  const nameRules = [
+    { test: v => v.length > 0, message: 'Name is required.' },
+  ];
+  const emailRules = [
+    { test: v => v.length > 0,           message: 'Email is required.' },
+    { test: v => EMAIL_REGEX.test(v),     message: 'Please enter a valid email address.' },
+  ];
+  const phoneRules = [
+    { test: v => v.length > 0, message: 'Phone number is required.' },
+  ];
+  const messageRules = [
+    { test: v => v.length > 0, message: 'Message is required.' },
+  ];
+
+  // Clear errors as the user corrects each field
+  attachLiveValidation(cfName,    nameRules);
+  attachLiveValidation(cfEmail,   emailRules);
+  attachLiveValidation(cfPhone,   phoneRules);
+  attachLiveValidation(cfMessage, messageRules);
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+
+    // Validate all fields; collect results so every field is checked
+    const isValid = [
+      validateField(cfName,    nameRules),
+      validateField(cfEmail,   emailRules),
+      validateField(cfPhone,   phoneRules),
+      validateField(cfMessage, messageRules),
+    ].every(Boolean);
+
+    if (isValid) {
+      showSuccess(form, 'Message sent — thank you, we\'ll be in touch soon.');
+    }
+  });
+})();
+
+/* ── Artwork modal inquire form ─────────────────────────────────────── */
+(function () {
+  const form = document.getElementById('modal-inquire-form');
+  if (!form) { return; }
+
+  const inquireName  = document.getElementById('inquire-name-input');
+  const inquireEmail = document.getElementById('inquire-email-input');
+  const inquireMsg   = document.getElementById('inquire-message-input');
+
+  const nameRules = [
+    { test: v => v.length > 0, message: 'Name is required.' },
+  ];
+  const emailRules = [
+    { test: v => v.length > 0,           message: 'Email is required.' },
+    { test: v => EMAIL_REGEX.test(v),     message: 'Please enter a valid email address.' },
+  ];
+  const messageRules = [
+    { test: v => v.length > 0, message: 'Message is required.' },
+  ];
+
+  attachLiveValidation(inquireName,  nameRules);
+  attachLiveValidation(inquireEmail, emailRules);
+  attachLiveValidation(inquireMsg,   messageRules);
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+
+    const isValid = [
+      validateField(inquireName,  nameRules),
+      validateField(inquireEmail, emailRules),
+      validateField(inquireMsg,   messageRules),
+    ].every(Boolean);
+
+    if (isValid) {
+      showSuccess(form, 'Inquiry sent — we\'ll be in touch soon.');
+    }
+  });
+})();
 
 /* ============================================================
    BIO MODAL
