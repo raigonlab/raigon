@@ -183,10 +183,17 @@ nav {
     z-index: 200;
     opacity: 0.55;
     pointer-events: none;
+  }
+
+.global-logo::before {
+    content: '';
+    position: absolute;
+    inset: -10px;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     mask-image: radial-gradient(circle, black 35%, transparent 72%);
     -webkit-mask-image: radial-gradient(circle, black 35%, transparent 72%);
+    z-index: -1;
   }
 
   /* Square wrapper that holds both the rotating ring and the centre icon */
