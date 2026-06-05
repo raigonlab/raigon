@@ -1544,3 +1544,75 @@ canvas#topo {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* ============================================================
+   ARQUIVE — EVENTS
+   Styles for dynamically rendered event blocks, type badge,
+   "Add to Calendar" button, and loading / error states.
+============================================================ */
+
+/* Event type badge — small accent pill above the title */
+.event-type-badge {
+  display: inline-block;
+  font-family: 'Syne', sans-serif;
+  font-size: 7px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: rgba(200, 169, 110, 0.7);
+  border: 1px solid rgba(200, 169, 110, 0.2);
+  border-radius: 100px;
+  padding: 3px 9px;
+  margin-bottom: 7px;
+}
+
+/* Event date line */
+.event-date {
+  font-family: 'Syne', sans-serif;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: rgba(232, 228, 220, 0.3);
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+/* Add to Calendar button */
+.event-cal-btn {
+  display: inline-block;
+  font-family: 'Syne', sans-serif;
+  font-size: 8px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: rgba(232, 228, 220, 0.38);
+  background: rgba(232, 228, 220, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 100px;
+  padding: 7px 14px;
+  text-decoration: none;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+.event-cal-btn:hover {
+  color: rgba(232, 228, 220, 0.82);
+  border-color: rgba(255, 255, 255, 0.22);
+  background: rgba(232, 228, 220, 0.06);
+}
+
+/* Loading state */
+.events-loading {
+  font-family: 'Syne', sans-serif;
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(232, 228, 220, 0.18);
+  padding: 16px 0 8px;
+}
+
+/* Error state */
+.events-error {
+  font-family: 'Syne', sans-serif;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  line-height: 2;
+  color: rgba(220, 90, 70, 0.55);
+  padding: 12px 0;
+}

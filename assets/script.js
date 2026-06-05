@@ -48,9 +48,8 @@ pills.forEach(pill => {
 
     document.getElementById(target).scrollTop = 0;
 
-    if (target === 'vault') {
-      initTopo();
-    }
+    if (target === 'vault')   { initTopo(); }
+    if (target === 'arquive') { loadEvents(); }
   });
 });
 
@@ -541,6 +540,133 @@ function initTopo() {
 /* Auto-init if Vault is somehow already active on page load */
 if (document.getElementById('vault').classList.contains('active')) {
   initTopo();
+}
+
+/* ============================================================
+   ARQUIVE — EVENTS
+   Fetches upcoming events from data/events.json and renders
+   them dynamically into the events column.
+   Called automatically the first time Arquive becomes active.
+============================================================ */
+
+/* Format a YYYYMMDD pair into a human-readable label.
+   Same-month range → "10–13 Sep 2026". Single day → "10 Jul 2026". */
+function formatEventDate(dateStart, dateEnd) {
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+  const sy = parseInt(dateStart.slice(0, 4), 10);
+  const sm = parseInt(dateStart.slice(4, 6), 10) - 1;
+  const sd = parseInt(dateStart.slice(6, 8), 10);
+
+  if (!dateEnd || dateEnd === dateStart) {
+    return `${sd} ${months[sm]} ${sy}`;
+  }
+
+  const ey = parseInt(dateEnd.slice(0, 4), 10);
+  const em = parseInt(dateEnd.slice(4, 6), 10) - 1;
+  const ed = parseInt(dateEnd.slice(6, 8), 10);
+
+  if (sm === em && sy === ey) {
+    return `${sd}–${ed} ${months[sm]} ${sy}`;
+  }
+  return `${sd} ${months[sm]} – ${ed} ${months[em]} ${ey}`;
+}
+
+/* Build a Google Calendar URL for one event object. */
+function buildCalendarUrl(event) {
+  const params = new URLSearchParams({
+    action:   'TEMPLATE',
+    text:     event.title,
+    dates:    `${event.dateStart}T${event.timeStart}/${event.dateEnd}T${event.timeEnd}`,
+    location: `${event.venue}, ${event.city}`,
+    details:  event.description,
+  });
+  return `https://calendar.google.com/calendar/render?${params.toString()}`;
+}
+
+/* Build and return one .event-block element from an event object. */
+function buildEventBlock(event) {
+  const block = document.createElement('div');
+  block.className = 'event-block';
+
+  const badge = document.createElement('span');
+  badge.className   = 'event-type-badge';
+  badge.textContent = event.type;
+
+  const title = document.createElement('div');
+  title.className   = 'event-title';
+  title.textContent = event.title;
+
+  const meta = document.createElement('div');
+  meta.className   = 'event-meta';
+  meta.textContent = `${event.venue} · ${event.city}`;
+
+  const date = document.createElement('div');
+  date.className   = 'event-date';
+  date.textContent = formatEventDate(event.dateStart, event.dateEnd);
+
+  const calBtn = document.createElement('a');
+  calBtn.className = 'event-cal-btn';
+  calBtn.href      = buildCalendarUrl(event);
+  calBtn.target    = '_blank';
+  calBtn.rel       = 'noopener noreferrer';
+  calBtn.textContent = 'Add to Calendar';
+
+  block.appendChild(badge);
+  block.appendChild(title);
+  block.appendChild(meta);
+  block.appendChild(date);
+  block.appendChild(calBtn);
+
+  return block;
+}
+
+/* Guard — events are loaded once per session. */
+let eventsLoaded = false;
+
+async function loadEvents() {
+  if (eventsLoaded) { return; }
+
+  const list = document.getElementById('events-list');
+  if (!list)  { return; }
+
+  // Show loading indicator
+  list.innerHTML = '';
+  const loadingEl = document.createElement('div');
+  loadingEl.className   = 'events-loading';
+  loadingEl.textContent = 'loading...';
+  list.appendChild(loadingEl);
+
+  try {
+    const response = await fetch('data/events.json');
+
+    if (!response.ok) {
+      throw new Error(`Server error: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    if (!data.events || data.events.length === 0) {
+      throw new Error('No events in response');
+    }
+
+    list.innerHTML = '';
+    data.events.forEach(event => list.appendChild(buildEventBlock(event)));
+    eventsLoaded = true;
+
+  } catch (error) {
+    list.innerHTML = '';
+    const errEl = document.createElement('div');
+    errEl.className   = 'events-error';
+    errEl.textContent = 'Unable to load events. Please try again later.';
+    list.appendChild(errEl);
+    console.error('Events fetch failed:', error);
+
+  } finally {
+    // Remove any residual loading indicator
+    const residual = list.querySelector('.events-loading');
+    if (residual) { residual.remove(); }
+  }
 }
 
 /* ============================================================

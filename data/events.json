@@ -1,0 +1,52 @@
+{
+  "events": [
+    {
+      "id": "evt-001",
+      "title": "Carvão Digital — Opening Night",
+      "venue": "Galerie Lange + Pult",
+      "city": "Zürich, Switzerland",
+      "dateStart": "20260710",
+      "dateEnd": "20260710",
+      "timeStart": "190000",
+      "timeEnd": "220000",
+      "description": "Opening reception for the solo exhibition Carvão Digital. Works from the Digital Charcoal and Form and Void series on view through August.",
+      "type": "Opening"
+    },
+    {
+      "id": "evt-002",
+      "title": "Positions Berlin — Booth 4.12",
+      "venue": "Station Berlin",
+      "city": "Berlin, Germany",
+      "dateStart": "20260910",
+      "dateEnd": "20260913",
+      "timeStart": "110000",
+      "timeEnd": "200000",
+      "description": "Participating artist at Positions Berlin, international art fair for contemporary art. New works from the Carvão Digital series.",
+      "type": "Art Fair"
+    },
+    {
+      "id": "evt-003",
+      "title": "Form and Void — Group Exhibition",
+      "venue": "Kunsthalle Basel",
+      "city": "Basel, Switzerland",
+      "dateStart": "20261107",
+      "dateEnd": "20261129",
+      "timeStart": "100000",
+      "timeEnd": "180000",
+      "description": "Group exhibition exploring structure and dissolution. Presenting selected works from the Form and Void series alongside five European artists.",
+      "type": "Exhibition"
+    },
+    {
+      "id": "evt-004",
+      "title": "Drawing Now — International Fair",
+      "venue": "Carreau du Temple",
+      "city": "Paris, France",
+      "dateStart": "20260326",
+      "dateEnd": "20260329",
+      "timeStart": "110000",
+      "timeEnd": "200000",
+      "description": "International drawing art fair. Presenting new works from the Carvão Digital series in a dedicated solo booth.",
+      "type": "Art Fair"
+    }
+  ]
+}
