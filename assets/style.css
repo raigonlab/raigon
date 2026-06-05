@@ -698,3 +698,9 @@ canvas#topo {
 .page.active .artwork-float:nth-child(6)     { animation-delay: 0.25s; }
 .page.active .artwork-float:nth-child(7)     { animation-delay: 0.30s; }
 .page.active .artwork-float:nth-child(8)     { animation-delay: 0.35s; }
+
+/* Gallery card entrance (applied via JS on build) */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 0.85; }
+  }
