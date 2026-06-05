@@ -208,166 +208,66 @@ window.addEventListener('load', () => {
 
 /* ============================================================
    ARTWORK MODAL
-   Opens a full-screen overlay showing one artwork at a time.
-   Supports prev/next navigation and keyboard control.
+   Structure lives in index.html. This section only handles
+   data population, open/close state, and keyboard navigation.
 ============================================================ */
-let activeModal  = null;
-let activeOnKey  = null;
+let currentIdx = -1;
+
+const artworkModal     = document.getElementById('artwork-modal');
+const modalImage       = document.getElementById('modal-image');
+const modalSide        = document.getElementById('modal-side');
+const modalSeriesEl    = document.getElementById('modal-series');
+const modalTitleEl     = document.getElementById('modal-title');
+const modalYearEl      = document.getElementById('modal-year');
+const modalDescEl      = document.getElementById('modal-description');
+const modalCounterEl   = document.getElementById('modal-counter');
+const modalInquireName = document.getElementById('modal-inquire-name');
+const modalInquireMsg  = document.getElementById('inquire-message-input');
+const modalInquireForm = document.getElementById('modal-inquire-form');
 
 function openArtwork(art) {
   showModal(artworks.findIndex(a => a.src === art.src));
 }
 
 function showModal(idx) {
+  currentIdx = idx;
+  const art  = artworks[idx];
 
-    if (activeOnKey) {
-      document.removeEventListener('keydown', activeOnKey);
-      activeOnKey = null;
-    }
+  modalImage.src             = art.src;
+  modalImage.alt             = art.title;
+  modalSeriesEl.textContent  = art.series;
+  modalTitleEl.textContent   = art.title;
+  modalYearEl.textContent    = art.year;
+  modalDescEl.textContent    = 'Carvão digital sobre superfície. Exploração da forma através da sobreposição e dissolução do traço.';
+  modalCounterEl.textContent = `${idx + 1} / ${artworks.length}`;
+  modalInquireName.textContent = art.title;
+  modalInquireMsg.value = `Hello, I'm interested in "${art.title}" (${art.year}) from the ${art.series} series. Could you please provide more information about this work, including availability and pricing?`;
 
-    const prevModal = activeModal;
-    if (prevModal) {
-      prevModal.style.opacity = '0';
-      setTimeout(() => prevModal.remove(), 300);
-    }
+  modalSide.classList.remove('inquire-open');
+  artworkModal.classList.add('open');
+  artworkModal.setAttribute('aria-hidden', 'false');
+}
 
-    const art   = artworks[idx];
-    const modal = document.createElement('div');
-    modal.className = 'artwork-modal';
-    activeModal = modal;
+function closeModal() {
+  artworkModal.classList.remove('open');
+  artworkModal.setAttribute('aria-hidden', 'true');
+}
 
-    // Close button — top-right corner
-    const closeBtn = document.createElement('button');
-    closeBtn.className = 'modal-close';
-    closeBtn.innerHTML = '&#x2715;';
-    closeBtn.setAttribute('aria-label', 'Close');
-    closeBtn.addEventListener('click', e => {
-      e.stopPropagation();
-      closeModal(modal, onKey);
-    });
+function onModalKey(e) {
+  if (!artworkModal.classList.contains('open')) return;
+  if (e.key === 'ArrowLeft')  showModal((currentIdx - 1 + artworks.length) % artworks.length);
+  if (e.key === 'ArrowRight') showModal((currentIdx + 1) % artworks.length);
+  if (e.key === 'Escape')     closeModal();
+}
 
-    // Edge chevron — left
-    const chevronL = document.createElement('button');
-    chevronL.className = 'modal-chevron modal-chevron--left';
-    chevronL.innerHTML = '&#8249;';
-    chevronL.setAttribute('aria-label', 'Previous artwork');
-    chevronL.addEventListener('click', e => {
-      e.stopPropagation();
-      showModal((idx - 1 + artworks.length) % artworks.length);
-    });
-
-    // Artwork image
-    const img = document.createElement('img');
-    img.src       = art.src;
-    img.alt       = art.title;
-    img.className = 'modal-image';
-
-    // Edge chevron — right
-    const chevronR = document.createElement('button');
-    chevronR.className = 'modal-chevron modal-chevron--right';
-    chevronR.innerHTML = '&#8250;';
-    chevronR.setAttribute('aria-label', 'Next artwork');
-    chevronR.addEventListener('click', e => {
-      e.stopPropagation();
-      showModal((idx + 1) % artworks.length);
-    });
-
-    // Side panel container
-    const side = document.createElement('div');
-    side.className = 'modal-side';
-
-    const panels = document.createElement('div');
-    panels.className = 'modal-panels';
-
-    // Info panel
-    const infoPanel = document.createElement('div');
-    infoPanel.className = 'modal-info-panel';
-    infoPanel.innerHTML = `
-      <div class="modal-series">${art.series}</div>
-      <div class="modal-title">${art.title}</div>
-      <div class="modal-year">${art.year}</div>
-      <div class="modal-divider"></div>
-      <div class="modal-description">Carvão digital sobre superfície. Exploração da forma através da sobreposição e dissolução do traço.</div>
-      <div class="modal-counter">${idx + 1} / ${artworks.length}</div>
-      <button class="modal-inquire-link">Inquire</button>
-    `;
-
-    // Inquire panel
-    const inquirePanel = document.createElement('div');
-    inquirePanel.className = 'modal-inquire-panel';
-    inquirePanel.innerHTML = `
-      <button class="modal-inquire-back">&#8592; back</button>
-      <div class="modal-inquire-heading">Inquire</div>
-      <div class="modal-inquire-artwork-name">${art.title}</div>
-      <form class="modal-inquire-form" onsubmit="return false">
-        <div class="modal-inquire-field">
-          <label class="modal-inquire-label">Name</label>
-          <input class="modal-inquire-input" type="text" placeholder="Your name" />
-        </div>
-        <div class="modal-inquire-field">
-          <label class="modal-inquire-label">Email</label>
-          <input class="modal-inquire-input" type="email" placeholder="your@email.com" />
-        </div>
-        <div class="modal-inquire-field">
-          <label class="modal-inquire-label">Message</label>
-          <textarea class="modal-inquire-textarea" rows="4">Hello, I'm interested in "${art.title}" (${art.year}) from the ${art.series} series. Could you please provide more information about this work, including availability and pricing?</textarea>
-        </div>
-        <button class="modal-inquire-submit" type="submit">Send inquiry</button>
-      </form>
-    `;
-
-    inquirePanel.querySelector('.modal-inquire-back').addEventListener('click', e => {
-      e.stopPropagation();
-      side.classList.remove('inquire-open');
-    });
-
-    infoPanel.querySelector('.modal-inquire-link').addEventListener('click', e => {
-      e.stopPropagation();
-      side.classList.add('inquire-open');
-    });
-
-    panels.appendChild(infoPanel);
-    panels.appendChild(inquirePanel);
-    side.appendChild(panels);
-
-    modal.addEventListener('click', e => {
-      if (e.target === modal) {
-        closeModal(modal, onKey);
-      }
-    });
-
-    function onKey(e) {
-      if (e.key === 'ArrowLeft')  { showModal((idx - 1 + artworks.length) % artworks.length); }
-      if (e.key === 'ArrowRight') { showModal((idx + 1) % artworks.length); }
-      if (e.key === 'Escape')     { closeModal(modal, onKey); }
-    }
-    activeOnKey = onKey;
-    document.addEventListener('keydown', onKey);
-
-    modal.appendChild(closeBtn);
-    modal.appendChild(chevronL);
-    modal.appendChild(img);
-    modal.appendChild(side);
-    modal.appendChild(chevronR);
-    document.body.appendChild(modal);
-
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        modal.style.opacity = '1';
-        img.style.transform = 'scale(1)';
-      });
-    });
-  }
-  
-  function closeModal(modal, onKey) {
-    modal.style.opacity = '0';
-    setTimeout(() => {
-      modal.remove();
-      activeModal = null;
-    }, 400);
-    document.removeEventListener('keydown', onKey);
-    activeOnKey = null;
-  }
+document.getElementById('modal-close').addEventListener('click', closeModal);
+document.getElementById('modal-prev').addEventListener('click', () => showModal((currentIdx - 1 + artworks.length) % artworks.length));
+document.getElementById('modal-next').addEventListener('click', () => showModal((currentIdx + 1) % artworks.length));
+artworkModal.addEventListener('click', e => { if (e.target === artworkModal) closeModal(); });
+document.getElementById('modal-inquire-link').addEventListener('click', () => modalSide.classList.add('inquire-open'));
+document.getElementById('modal-inquire-back').addEventListener('click', () => modalSide.classList.remove('inquire-open'));
+modalInquireForm.addEventListener('submit', e => e.preventDefault());
+document.addEventListener('keydown', onModalKey);
   
 /* ============================================================
    VAULT — COLLECTION SYMBOLS
