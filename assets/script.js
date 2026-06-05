@@ -451,6 +451,14 @@ function initTopo() {
 
    resizeCanvas();
   window.addEventListener('resize', resizeCanvas);
+
+    /* Track mouse position inside the vault section */
+    document.getElementById('vault').addEventListener('mousemove', e => {
+      const rect   = canvas.getBoundingClientRect();
+      topoTargetX  = (e.clientX - rect.left) / rect.width;
+      topoTargetY  = (e.clientY - rect.top)  / rect.height;
+    });
+   
  
 
   });
