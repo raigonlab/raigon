@@ -7,14 +7,13 @@
 
 
 /* ── DOT-GRID CANVAS ── */
-/* Fixed behind all pages — visible only through Vault's transparent background */
+/* Absolute inside #vault, behind vault-scene (which holds the topo canvas) */
 #dot-grid {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: -1;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
   pointer-events: none;
   display: block;
 }
@@ -729,7 +728,7 @@ nav {
 ============================================================ */
  
 #vault {
-    background: transparent;
+    background: #060810;
     padding: 0;
     overflow: hidden;
   }
