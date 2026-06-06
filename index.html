@@ -293,6 +293,32 @@
   </div>
   <!-- End artwork modal -->
 
+  <!-- ============================================================
+    TEMPLATES
+    HTML skeletons cloned at runtime by script.js — never rendered directly.
+  ============================================================ -->
+
+  <!-- Event block — cloned once per event by loadEvents() -->
+  <template id="event-block-tpl">
+    <div class="event-block">
+      <span class="event-type-badge"></span>
+      <div class="event-title"></div>
+      <div class="event-meta"></div>
+      <div class="event-date"></div>
+      <a class="event-cal-btn" target="_blank" rel="noopener noreferrer">Add to Calendar</a>
+    </div>
+  </template>
+
+  <!-- Events loading state -->
+  <template id="events-loading-tpl">
+    <div class="events-loading">loading...</div>
+  </template>
+
+  <!-- Events error state -->
+  <template id="events-error-tpl">
+    <div class="events-error">Unable to load events. Please try again later.</div>
+  </template>
+
   <!-- JavaScrip link -->
   <script src="assets/script.js"></script>
 </body>

@@ -284,7 +284,7 @@ document.addEventListener('keydown', onModalKey);
 ============================================================ */
 
 window.addEventListener('load', () => {
-  document.getElementById('img-pyramid').src = 'assets/images/piramede-raigon.png';
+  document.getElementById('img-pyramid').src = 'assets/images/hero/digital-charcoal-00011.jpg';
   document.getElementById('img-shell').src   = 'assets/images/Untitled_Artwork_29.png';
   document.getElementById('img-lake').src    = 'assets/images/montanha_raigon.png';
 });
@@ -584,39 +584,20 @@ function buildCalendarUrl(event) {
   return `https://calendar.google.com/calendar/render?${params.toString()}`;
 }
 
-/* Build and return one .event-block element from an event object. */
+/* Clone a <template> by id and return the root element. */
+function cloneTpl(id) {
+  return document.getElementById(id).content.cloneNode(true).firstElementChild;
+}
+
+/* Fill and return one event block by cloning the HTML template. */
 function buildEventBlock(event) {
-  const block = document.createElement('div');
-  block.className = 'event-block';
+  const block = cloneTpl('event-block-tpl');
 
-  const badge = document.createElement('span');
-  badge.className   = 'event-type-badge';
-  badge.textContent = event.type;
-
-  const title = document.createElement('div');
-  title.className   = 'event-title';
-  title.textContent = event.title;
-
-  const meta = document.createElement('div');
-  meta.className   = 'event-meta';
-  meta.textContent = `${event.venue} · ${event.city}`;
-
-  const date = document.createElement('div');
-  date.className   = 'event-date';
-  date.textContent = formatEventDate(event.dateStart, event.dateEnd);
-
-  const calBtn = document.createElement('a');
-  calBtn.className = 'event-cal-btn';
-  calBtn.href      = buildCalendarUrl(event);
-  calBtn.target    = '_blank';
-  calBtn.rel       = 'noopener noreferrer';
-  calBtn.textContent = 'Add to Calendar';
-
-  block.appendChild(badge);
-  block.appendChild(title);
-  block.appendChild(meta);
-  block.appendChild(date);
-  block.appendChild(calBtn);
+  block.querySelector('.event-type-badge').textContent = event.type;
+  block.querySelector('.event-title').textContent      = event.title;
+  block.querySelector('.event-meta').textContent       = `${event.venue} · ${event.city}`;
+  block.querySelector('.event-date').textContent       = formatEventDate(event.dateStart, event.dateEnd);
+  block.querySelector('.event-cal-btn').href           = buildCalendarUrl(event);
 
   return block;
 }
@@ -632,10 +613,7 @@ async function loadEvents() {
 
   // Show loading indicator
   list.innerHTML = '';
-  const loadingEl = document.createElement('div');
-  loadingEl.className   = 'events-loading';
-  loadingEl.textContent = 'loading...';
-  list.appendChild(loadingEl);
+  list.appendChild(cloneTpl('events-loading-tpl'));
 
   try {
     const response = await fetch('data/events.json');
@@ -656,10 +634,7 @@ async function loadEvents() {
 
   } catch (error) {
     list.innerHTML = '';
-    const errEl = document.createElement('div');
-    errEl.className   = 'events-error';
-    errEl.textContent = 'Unable to load events. Please try again later.';
-    list.appendChild(errEl);
+    list.appendChild(cloneTpl('events-error-tpl'));
     console.error('Events fetch failed:', error);
 
   } finally {
