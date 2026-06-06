@@ -831,6 +831,13 @@ canvas#topo {
 
   .sym-btn:hover .sym-glow { opacity: 1; }
 
+  /* Coming soon slot — visible but not interactive */
+.sym-btn--soon {
+    opacity: 0.38;
+    cursor: default;
+    pointer-events: none;
+  }
+
   /* Feedback message area — shown on collection load or error */
 .vault-feedback {
     position: absolute;

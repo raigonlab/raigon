@@ -285,7 +285,6 @@ document.addEventListener('keydown', onModalKey);
 
 window.addEventListener('load', () => {
   document.getElementById('img-pyramid').src = 'assets/images/hero/digital-charcoal-00011.jpg';
-  document.getElementById('img-shell').src   = 'assets/images/hero/digital-charcoal-00009.jpg';
   document.getElementById('img-emotion').src = 'assets/images/e-motion/e-motion-00002.jpg';
 });
 
