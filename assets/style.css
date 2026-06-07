@@ -1531,12 +1531,12 @@ nav {
 .collection-overlay-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 16px;
+  gap: 28px;
   overflow-y: auto;
   flex: 1;
   min-height: 0;
   align-content: start;
-  padding: 24px 12%;
+  padding: 24px 14%;
   padding-bottom: 48px;
 }
 
@@ -1546,7 +1546,7 @@ nav {
   aspect-ratio: 1 / 1;
   background: #060810;
   cursor: pointer;
-  border-radius: 20px;
+  border-radius: 30px;
 }
 
 .collection-card-img {
