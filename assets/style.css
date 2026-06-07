@@ -855,7 +855,7 @@ nav {
 
   /* Coming soon slot — visible but not interactive */
 .sym-btn--soon {
-    opacity: 0.65;
+    opacity: 1;
     cursor: default;
     pointer-events: none;
   }
