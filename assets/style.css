@@ -792,8 +792,8 @@ nav {
 
 /* Collection symbol image */
 .sym-img {
-    width: 130px;
-    height: 130px;
+    width: 195px;
+    height: 195px;
     object-fit: cover;
     border-radius: 8px;
     background: rgba(0, 0, 0, 0.5);
@@ -818,11 +818,29 @@ nav {
 
   .sym-btn:hover .sym-label { color: rgba(232, 228, 220, 0.8); }
 
+/* Hover verbs — appear below label on hover */
+.sym-verbs {
+    font-family: 'Syne', sans-serif;
+    font-size: 8px;
+    letter-spacing: 3px;
+    text-transform: lowercase;
+    color: rgba(232, 228, 220, 0.22);
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+    pointer-events: none;
+  }
+
+  .sym-btn:hover .sym-verbs {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
   /* Glow halo behind the symbol image on hover */
 .sym-glow {
     position: absolute;
-    width: 120px;
-    height: 120px;
+    width: 180px;
+    height: 180px;
     border-radius: 50%;
     background: radial-gradient(circle, rgba(200, 169, 110, 0.08) 0%, transparent 70%);
     pointer-events: none;
