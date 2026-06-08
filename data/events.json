@@ -35,18 +35,6 @@
       "timeEnd": "180000",
       "description": "Group exhibition exploring structure and dissolution. Presenting selected works from the Form and Void series alongside five European artists.",
       "type": "Exhibition"
-    },
-    {
-      "id": "evt-004",
-      "title": "Drawing Now — International Fair",
-      "venue": "Carreau du Temple",
-      "city": "Paris, France",
-      "dateStart": "20260326",
-      "dateEnd": "20260329",
-      "timeStart": "110000",
-      "timeEnd": "200000",
-      "description": "International drawing art fair. Presenting new works from the Carvão Digital series in a dedicated solo booth.",
-      "type": "Art Fair"
     }
   ]
 }
