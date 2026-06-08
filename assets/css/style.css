@@ -1772,9 +1772,9 @@ nav {
   position: fixed;
   inset: 0;
   z-index: 9998;
-  background: rgba(4, 3, 10, 0.85);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  background: rgba(4, 3, 10, 0.55);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1791,8 +1791,10 @@ nav {
 
 .access-gate-box {
   position: relative;
-  background: var(--surface);
-  border: 1px solid var(--border);
+  background: rgba(18, 14, 9, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(200, 169, 110, 0.35);
   border-radius: 12px;
   padding: 52px 48px 44px;
   width: 100%;
@@ -1802,6 +1804,9 @@ nav {
   flex-direction: column;
   align-items: center;
   gap: 0;
+  box-shadow:
+    inset 0 1px 0 rgba(200, 169, 110, 0.15),
+    0 32px 80px rgba(0, 0, 0, 0.7);
 }
 
 .access-gate-close {
