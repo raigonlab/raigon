@@ -176,7 +176,7 @@ window.addEventListener('load', () => {
 
   const hint = document.createElement('div');
   hint.className   = 'scroll-hint';
-  hint.textContent = '← arrasta para explorar →';
+  hint.textContent = '← drag to explore →';
   scene.appendChild(hint);
 
   const scrollBar   = document.createElement('div');

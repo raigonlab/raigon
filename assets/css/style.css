@@ -410,7 +410,7 @@ nav {
     color: rgba(232, 228, 220, 0.25);
     pointer-events: none;
     opacity: 0;
-    animation: hintFade 3s ease 2s forwards;
+    animation: hintFade 6s ease 2s forwards;
   }
 
   /* Scroll position indicator bar — draggable, pushes the gallery when scrubbed */
@@ -427,11 +427,12 @@ nav {
     touch-action: none;
   }
 
-  /* Enlarged invisible hit area so the thin bar stays easy to grab */
+  /* Enlarged invisible hit area so the thin bar stays easy to grab — extends
+     upward only, so it doesn't intrude into the fixed nav bar below it */
 .scroll-bar::before {
     content: '';
     position: absolute;
-    inset: -12px 0;
+    inset: -20px 0 -2px 0;
   }
 
 .scroll-bar--dragging {
@@ -1734,12 +1735,22 @@ nav {
 
   /* Gallery layers — cards 20% bigger, 30% less lateral gap */
   .layer-1 { top: 8%; height: 22%; }
-  .layer-2 { top: 36.6%;   height: 19%; }
-  .layer-3 { top: 68%;   height: 17%; }
+  .layer-2 { top: 42%;   height: 19%; }
+  .layer-3 { top: 72%;   height: 17%; }
 
   .layer {
     gap: 415px;
     padding: 0 40px;
+  }
+
+  /* Lift the scroll-bar clear of the taller mobile nav bar, and thicken it slightly */
+  .scroll-bar {
+    bottom: 40px;
+    height: 3px;
+  }
+
+  .scroll-thumb {
+    height: 6px;
   }
 }
 
