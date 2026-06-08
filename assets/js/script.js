@@ -79,6 +79,16 @@ window.addEventListener('hashchange', () => {
     return;
   }
 
+  if (page === 'vault/collection') {
+    if (artworkModal.classList.contains('open')) {
+      artworkModal.classList.remove('open');
+      artworkModal.setAttribute('aria-hidden', 'true');
+      modalWorks   = artworks;
+      modalContext = 'home';
+    }
+    return;
+  }
+
   if (page === 'vault') {
     const openOverlay = document.querySelector('.collection-overlay.open');
     if (openOverlay) {
@@ -257,7 +267,9 @@ window.addEventListener('load', () => {
    Structure lives in index.html. This section only handles
    data population, open/close state, and keyboard navigation.
 ============================================================ */
-let currentIdx = -1;
+let currentIdx   = -1;
+let modalWorks   = artworks;
+let modalContext = 'home';
 
 const artworkModal     = document.getElementById('artwork-modal');
 const modalImage       = document.getElementById('modal-image');
@@ -279,44 +291,54 @@ function openArtwork(art) {
 /* Populate and reveal the modal for the artwork at index idx */
 function showModal(idx) {
   currentIdx = idx;
-  const art  = artworks[idx];
+  const art  = modalWorks[idx];
 
   modalImage.src               = art.src;
   modalImage.alt               = art.title;
-  modalSeriesEl.textContent    = art.series;
+  modalSeriesEl.textContent    = art.series  || '';
   modalTitleEl.textContent     = art.title;
-  modalYearEl.textContent      = art.year;
+  modalYearEl.textContent      = art.year    || '';
   modalDescEl.textContent      = 'Carvão digital sobre superfície. Exploração da forma através da sobreposição e dissolução do traço.';
-  modalCounterEl.textContent   = `${idx + 1} / ${artworks.length}`;
+  modalCounterEl.textContent   = `${idx + 1} / ${modalWorks.length}`;
   modalInquireName.textContent = art.title;
-  modalInquireMsg.value        = `Hello, I'm interested in "${art.title}" (${art.year}) from the ${art.series} series. Could you please provide more information about this work, including availability and pricing?`;
+  modalInquireMsg.value        = `Hello, I'm interested in "${art.title}"${art.year ? ` (${art.year})` : ''}${art.series ? ` from the ${art.series} series` : ''}. Could you please provide more information about this work, including availability and pricing?`;
 
   modalSide.classList.remove('inquire-open');
   resetInquirePanel();
   artworkModal.classList.add('open');
   artworkModal.setAttribute('aria-hidden', 'false');
-  const expectedHash = `home/modal/${idx}`;
+  const expectedHash = `${modalContext}/modal/${idx}`;
   if (location.hash !== `#${expectedHash}`) { location.hash = expectedHash; }
+}
+
+/* Open a work from a collection overlay — sets context and works array */
+function openCollectionWork(works, idx) {
+  modalWorks   = works;
+  modalContext = 'vault/collection';
+  showModal(idx);
 }
 
 /* Hide the artwork modal */
 function closeModal() {
   artworkModal.classList.remove('open');
   artworkModal.setAttribute('aria-hidden', 'true');
-  if (location.hash.startsWith('#home/modal')) { location.hash = 'home'; }
+  const returnHash = modalContext === 'vault/collection' ? 'vault/collection' : 'home';
+  modalWorks   = artworks;
+  modalContext = 'home';
+  if (location.hash.includes('/modal')) { location.hash = returnHash; }
 }
 
 /* Keyboard navigation: arrows to browse, Escape to close */
 function onModalKey(e) {
   if (!artworkModal.classList.contains('open')) { return; }
-  if (e.key === 'ArrowLeft')  { showModal((currentIdx - 1 + artworks.length) % artworks.length); }
-  if (e.key === 'ArrowRight') { showModal((currentIdx + 1) % artworks.length); }
+  if (e.key === 'ArrowLeft')  { showModal((currentIdx - 1 + modalWorks.length) % modalWorks.length); }
+  if (e.key === 'ArrowRight') { showModal((currentIdx + 1) % modalWorks.length); }
   if (e.key === 'Escape')     { closeModal(); }
 }
 
 document.getElementById('modal-close').addEventListener('click', closeModal);
-document.getElementById('modal-prev').addEventListener('click', () => showModal((currentIdx - 1 + artworks.length) % artworks.length));
-document.getElementById('modal-next').addEventListener('click', () => showModal((currentIdx + 1) % artworks.length));
+document.getElementById('modal-prev').addEventListener('click', () => showModal((currentIdx - 1 + modalWorks.length) % modalWorks.length));
+document.getElementById('modal-next').addEventListener('click', () => showModal((currentIdx + 1) % modalWorks.length));
 artworkModal.addEventListener('click', e => { if (e.target === artworkModal) { closeModal(); } });
 document.getElementById('modal-inquire-link').addEventListener('click', () => modalSide.classList.add('inquire-open'));
 document.getElementById('modal-inquire-back').addEventListener('click', () => {
@@ -383,12 +405,14 @@ function buildCollectionOverlay(collection) {
   const grid = document.createElement('div');
   grid.className = 'collection-overlay-grid';
 
-  collection.works.forEach(work => {
+  collection.works.forEach((work, workIdx) => {
     const card = document.createElement('div');
     card.className = 'collection-card';
 
     /* Mark sold works with a CSS class for styling */
     if (work.sold) { card.classList.add('collection-card--sold'); }
+
+    card.addEventListener('click', () => openCollectionWork(collection.works, workIdx));
 
     const img = document.createElement('img');
     img.className = 'collection-card-img';
