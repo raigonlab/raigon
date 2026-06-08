@@ -30,10 +30,10 @@
 :root {
     --bg:         #0a0907;
     --surface:    #1c1916;
-    --border:     rgba(200, 169, 110, 0.12);
+    --border:     rgba(196, 98, 45, 0.18);
     --text:       #e8e4dc;
     --muted:      rgba(232, 228, 220, 0.4);
-    --accent:     #c8a96e;
+    --accent:     #c4622d;
     --blue-dark:  #0d1520;
     --blue-mid:   #1a2a3a;
     --green:      #4a7c6a;
@@ -282,7 +282,7 @@ nav {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    box-shadow: 0 0 40px 15px rgba(200, 169, 110, 0.06);
+    box-shadow: 0 0 40px 15px rgba(196, 98, 45, 0.06);
   }
    
   /* Placeholder floating artwork tiles (shown before JS loads real images) */
@@ -553,7 +553,7 @@ nav {
     font-size: 10px;
     letter-spacing: 4px;
     text-transform: uppercase;
-    color: rgba(200, 169, 110, 0.65);
+    color: rgba(196, 98, 45, 0.65);
     margin-bottom: 16px;
   }
 
@@ -570,14 +570,14 @@ nav {
   .modal-year {
     font-size: 11px;
     letter-spacing: 2px;
-    color: rgba(200, 169, 110, 0.5);
+    color: rgba(196, 98, 45, 0.5);
     margin-bottom: 24px;
   }
 
   .modal-divider {
     width: 32px;
     height: 1px;
-    background: rgba(200, 169, 110, 0.25);
+    background: rgba(196, 98, 45, 0.25);
     margin-bottom: 24px;
   }
 
@@ -842,7 +842,7 @@ nav {
     width: 180px;
     height: 180px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(200, 169, 110, 0.08) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(196, 98, 45, 0.08) 0%, transparent 70%);
     pointer-events: none;
     top: 50%;
     left: 50%;
@@ -916,7 +916,7 @@ nav {
   font-size: 9px;
   letter-spacing: 4px;
   text-transform: uppercase;
-  color: rgba(200, 169, 110, 0.6);
+  color: rgba(196, 98, 45, 0.6);
   margin-bottom: 16px;
 }
 
@@ -1133,7 +1133,7 @@ nav {
   font-size: 9px;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: rgba(200, 169, 110, 0.6);
+  color: rgba(196, 98, 45, 0.6);
   padding-top: 16px;
   border-top: 1px solid var(--border);
 }
@@ -1529,7 +1529,7 @@ nav {
   font-size: 9px;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: rgba(200, 169, 110, 0.45);
+  color: rgba(196, 98, 45, 0.45);
 }
 
 .collection-overlay-close {
@@ -1706,8 +1706,8 @@ nav {
   font-size: 7px;
   letter-spacing: 2.5px;
   text-transform: uppercase;
-  color: rgba(200, 169, 110, 0.7);
-  border: 1px solid rgba(200, 169, 110, 0.2);
+  color: rgba(196, 98, 45, 0.7);
+  border: 1px solid rgba(196, 98, 45, 0.2);
   border-radius: 100px;
   padding: 3px 9px;
   margin-bottom: 7px;
@@ -1794,7 +1794,7 @@ nav {
   background: rgba(18, 14, 9, 0.6);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(200, 169, 110, 0.35);
+  border: 1px solid rgba(196, 98, 45, 0.35);
   border-radius: 12px;
   padding: 52px 48px 44px;
   width: 100%;
@@ -1805,7 +1805,7 @@ nav {
   align-items: center;
   gap: 0;
   box-shadow:
-    inset 0 1px 0 rgba(200, 169, 110, 0.15),
+    inset 0 1px 0 rgba(196, 98, 45, 0.15),
     0 32px 80px rgba(0, 0, 0, 0.7);
 }
 
@@ -1830,7 +1830,7 @@ nav {
   font-size: 8px;
   letter-spacing: 5px;
   text-transform: uppercase;
-  color: rgba(200, 169, 110, 0.65);
+  color: rgba(196, 98, 45, 0.65);
   margin-bottom: 16px;
 }
 
@@ -1909,8 +1909,9 @@ nav {
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: 0;
+  text-align: left;
 }
 
 .access-gate-success.hidden,
@@ -1930,12 +1931,12 @@ nav {
 
 .access-gate-welcome {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 22px;
-  font-weight: 300;
-  font-style: italic;
+  font-size: 15px;
+  font-weight: 600;
+  font-style: normal;
   color: var(--text);
   margin-bottom: 36px;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
 }
 
 .access-gate-enter {
