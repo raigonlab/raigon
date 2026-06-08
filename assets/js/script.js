@@ -188,6 +188,40 @@ window.addEventListener('load', () => {
   scrollBar.appendChild(scrollThumb);
   scene.appendChild(scrollBar);
 
+  /* Scroll-bar drag control — scrubbing the bar pushes the artworks left/right */
+  let barDragging   = false;
+  let barLastX      = 0;
+
+  scrollBar.addEventListener('pointerdown', e => {
+    barDragging = true;
+    barLastX    = e.clientX;
+    scrollBar.classList.add('scroll-bar--dragging');
+    scrollBar.setPointerCapture(e.pointerId);
+  });
+
+  scrollBar.addEventListener('pointermove', e => {
+    if (!barDragging) { return; }
+    const dx = e.clientX - barLastX;
+    barLastX = e.clientX;
+
+    const period = layers[0].scrollWidth / 3;
+    const scale  = period / 160;
+
+    layers.forEach((_, i) => {
+      targetOffsets[i] -= dx * scale * (1 - i * 0.15);
+    });
+  });
+
+  function endBarDrag(e) {
+    if (!barDragging) { return; }
+    barDragging = false;
+    scrollBar.classList.remove('scroll-bar--dragging');
+    scrollBar.releasePointerCapture(e.pointerId);
+  }
+
+  scrollBar.addEventListener('pointerup', endBarDrag);
+  scrollBar.addEventListener('pointercancel', endBarDrag);
+
   /* Mouse and drag controls for parallax gallery interaction */
 
   scene.addEventListener('mousemove', e => {
