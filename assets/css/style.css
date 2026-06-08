@@ -1621,13 +1621,18 @@ nav {
 /* --- Mobile (480px) --- */
 @media (max-width: 480px) {
   .global-logo {
-    top: 16px;
+    top: 26px;
     left: 16px;
   }
 
   .logo-ring-wrap {
     width: 64px;
     height: 64px;
+  }
+
+  .logo-ring-text {
+    font-size: 30px;
+    letter-spacing: 5px;
   }
 
   .pill {
@@ -1690,11 +1695,6 @@ nav {
 
   .collection-overlay-header {
     padding: 0 20px;
-  }
-
-  /* Logo — ring text 50% bigger, R icon unchanged */
-  .logo-ring-text {
-    font-size: 30px;
   }
 
   /* Nav — almost full width */
