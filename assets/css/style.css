@@ -28,9 +28,9 @@
  
 /* ── CSS CUSTOM PROPERTIES (design tokens) ── */
 :root {
-    --bg:         #222222;
-    --surface:    #111110;
-    --border:     rgba(255, 255, 255, 0.07);
+    --bg:         #0a0907;
+    --surface:    #1c1916;
+    --border:     rgba(200, 169, 110, 0.12);
     --text:       #e8e4dc;
     --muted:      rgba(232, 228, 220, 0.4);
     --accent:     #c8a96e;
@@ -553,7 +553,7 @@ nav {
     font-size: 10px;
     letter-spacing: 4px;
     text-transform: uppercase;
-    color: rgba(232, 228, 220, 0.3);
+    color: rgba(200, 169, 110, 0.65);
     margin-bottom: 16px;
   }
 
@@ -570,14 +570,14 @@ nav {
   .modal-year {
     font-size: 11px;
     letter-spacing: 2px;
-    color: rgba(232, 228, 220, 0.3);
+    color: rgba(200, 169, 110, 0.5);
     margin-bottom: 24px;
   }
 
   .modal-divider {
     width: 32px;
     height: 1px;
-    background: rgba(232, 228, 220, 0.15);
+    background: rgba(200, 169, 110, 0.25);
     margin-bottom: 24px;
   }
 
@@ -916,7 +916,7 @@ nav {
   font-size: 9px;
   letter-spacing: 4px;
   text-transform: uppercase;
-  color: var(--muted);
+  color: rgba(200, 169, 110, 0.6);
   margin-bottom: 16px;
 }
 
@@ -1133,7 +1133,7 @@ nav {
   font-size: 9px;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: var(--muted);
+  color: rgba(200, 169, 110, 0.6);
   padding-top: 16px;
   border-top: 1px solid var(--border);
 }
@@ -1529,7 +1529,7 @@ nav {
   font-size: 9px;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: rgba(232, 228, 220, 0.25);
+  color: rgba(200, 169, 110, 0.45);
 }
 
 .collection-overlay-close {
@@ -1825,7 +1825,7 @@ nav {
   font-size: 8px;
   letter-spacing: 5px;
   text-transform: uppercase;
-  color: var(--muted);
+  color: rgba(200, 169, 110, 0.65);
   margin-bottom: 16px;
 }
 
