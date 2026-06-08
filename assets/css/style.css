@@ -1691,6 +1691,32 @@ nav {
   .collection-overlay-header {
     padding: 0 20px;
   }
+
+  /* Logo — ring text 50% bigger, R icon unchanged */
+  .logo-ring-text {
+    font-size: 30px;
+  }
+
+  /* Nav — almost full width */
+  .nav-pills {
+    width: calc(100% - 40px);
+    justify-content: space-between;
+  }
+
+  .pill {
+    flex: 1;
+    justify-content: center;
+  }
+
+  /* Gallery layers — cards 20% bigger, 30% less lateral gap */
+  .layer-1 { height: 22%; }
+  .layer-2 { height: 19%; }
+  .layer-3 { height: 17%; }
+
+  .layer {
+    gap: 415px;
+    padding: 0 40px;
+  }
 }
 
 /* ============================================================
