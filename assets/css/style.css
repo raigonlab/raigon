@@ -1644,8 +1644,13 @@ nav {
   }
 
   .logo-ring-wrap {
-    width: 64px;
-    height: 64px;
+    width: 80px;
+    height: 80px;
+  }
+
+  .logo-icon-svg {
+    width: 58px;
+    height: 58px;
   }
 
   .logo-ring-text {
