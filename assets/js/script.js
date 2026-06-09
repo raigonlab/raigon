@@ -151,13 +151,9 @@ window.addEventListener('load', () => {
     const layer = document.createElement('div');
     layer.className = `layer layer-${ri + 1}`;
 
-    [...row, ...row, ...row].forEach((art, i) => {
+    [...row, ...row, ...row].forEach(art => {
       const card = document.createElement('div');
       card.className = 'artwork-card';
-
-      if (i < row.length) {
-        card.style.animation = `fadeIn 0.8s ease ${(ri * 0.2 + i * 0.08).toFixed(2)}s both`;
-      }
 
       const img = document.createElement('img');
       img.src     = art.src;
