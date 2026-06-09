@@ -1861,6 +1861,7 @@ nav {
     grid-area: 1 / 1;
     width: 100%;
     transition: opacity 0.35s ease;
+    justify-content: flex-start;
   }
 
   .modal-inquire-panel {
