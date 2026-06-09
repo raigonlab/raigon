@@ -243,12 +243,13 @@ window.addEventListener('load', () => {
     dragOffsets = [...offsets];
   });
 
-  window.addEventListener('pointerup', () => { isDragging = false; });
+  window.addEventListener('pointerup',     () => { isDragging = false; });
+  window.addEventListener('pointercancel', () => { isDragging = false; dragMoved = false; });
 
   window.addEventListener('pointermove', e => {
     if (!isDragging) { return; }
     const dx = e.clientX - dragStartX;
-    if (Math.abs(dx) < 8) { return; }
+    if (Math.abs(dx) < 18) { return; }
     dragMoved = true;
     layers.forEach((_, i) => {
       targetOffsets[i] = dragOffsets[i] + dx * (1 - i * 0.15);
