@@ -1884,6 +1884,10 @@ nav {
     pointer-events: all;
   }
 
+  .modal-inquire-success {
+    margin-top: 24px;
+  }
+
   .bio-modal {
     padding: 28px 20px;
     width: calc(100% - 24px);
