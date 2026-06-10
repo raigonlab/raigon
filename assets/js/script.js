@@ -492,6 +492,14 @@ function buildCollectionOverlay(collection) {
     img.alt       = work.title;
     img.loading   = 'lazy';
 
+    /* Square source images are wall-mockup renders with a frame/border
+       baked in — zoom in so the thumbnail reads as a flush portrait crop. */
+    img.addEventListener('load', () => {
+      if (img.naturalWidth === img.naturalHeight) {
+        img.classList.add('collection-card-img--zoom');
+      }
+    });
+
     /* Sold badge — only rendered when the work.sold flag is true */
     if (work.sold) {
       const badge = document.createElement('div');
