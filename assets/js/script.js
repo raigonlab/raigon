@@ -488,17 +488,21 @@ function buildCollectionOverlay(collection) {
 
     const img = document.createElement('img');
     img.className = 'collection-card-img';
-    img.src       = work.src;
     img.alt       = work.title;
     img.loading   = 'lazy';
 
     /* Square source images are wall-mockup renders with a frame/border
-       baked in — zoom in so the thumbnail reads as a flush portrait crop. */
-    img.addEventListener('load', () => {
+       baked in — zoom in so the thumbnail reads as a flush portrait crop.
+       Images already cached from the home page can be `complete` before
+       the load listener attaches, so check both. */
+    function applyZoomIfSquare() {
       if (img.naturalWidth === img.naturalHeight) {
         img.classList.add('collection-card-img--zoom');
       }
-    });
+    }
+    img.addEventListener('load', applyZoomIfSquare);
+    img.src = work.src;
+    if (img.complete) { applyZoomIfSquare(); }
 
     /* Sold badge — only rendered when the work.sold flag is true */
     if (work.sold) {

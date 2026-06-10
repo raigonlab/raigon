@@ -1943,7 +1943,25 @@ nav {
   }
 
   .collection-overlay-header {
-    padding: 32px 30px 16px;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 64px 30px 20px;
+  }
+
+  .collection-overlay-title {
+    text-align: center;
+  }
+
+  .collection-overlay-count {
+    color: rgba(196, 98, 45, 1);
+  }
+
+  .collection-overlay-close {
+    top: 24px;
+    right: 20px;
+    transform: none;
+    color: rgba(232, 228, 220, 1);
   }
 
   /* Nav — almost full width */
