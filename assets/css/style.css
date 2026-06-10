@@ -868,8 +868,10 @@ nav {
     justify-content: flex-start;
     gap: 28px;
     padding: 180px 5% 120px;
-    overflow-y: auto;
-    pointer-events: none;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
+    pointer-events: auto;
   }
 
   /* Outer rounded card — image frame + footer info */
