@@ -1938,6 +1938,20 @@ nav {
     padding: 160px 24px 120px;
   }
 
+  /* Less tall image frame — better balance with the footer below */
+  .collection-card-frame {
+    aspect-ratio: 4 / 3;
+  }
+
+  /* Push the open pill to the right with a comfortable margin */
+  .collection-card-footer {
+    padding: 4px 18px 14px 14px;
+  }
+
+  .collection-card-open {
+    font-size: 12px;
+  }
+
   .collection-overlay-grid {
     grid-template-columns: repeat(2, 1fr);
   }
