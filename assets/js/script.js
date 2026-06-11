@@ -618,6 +618,10 @@ function buildCollectionOverlay(collection) {
     overlayBarLastX    = e.clientX;
     overlayScrollBar.classList.add('scroll-bar--dragging');
     overlayScrollBar.setPointerCapture(e.pointerId);
+    /* Scroll-snap fights small drag increments, snapping the grid
+       straight back to its current position. Suspend it for the
+       drag and let it re-settle once the pointer is released. */
+    grid.style.scrollSnapType = 'none';
   });
 
   overlayScrollBar.addEventListener('pointermove', e => {
@@ -634,6 +638,7 @@ function buildCollectionOverlay(collection) {
     overlayBarDragging = false;
     overlayScrollBar.classList.remove('scroll-bar--dragging');
     overlayScrollBar.releasePointerCapture(e.pointerId);
+    grid.style.scrollSnapType = '';
   }
 
   overlayScrollBar.addEventListener('pointerup', endOverlayBarDrag);
@@ -726,6 +731,10 @@ if (vaultSymbols && vaultScrollBar && vaultThumb) {
     vaultBarLastX    = e.clientX;
     vaultScrollBar.classList.add('scroll-bar--dragging');
     vaultScrollBar.setPointerCapture(e.pointerId);
+    /* Scroll-snap fights small drag increments, snapping the row
+       straight back to its current position. Suspend it for the
+       drag and let it re-settle once the pointer is released. */
+    vaultSymbols.style.scrollSnapType = 'none';
   });
 
   vaultScrollBar.addEventListener('pointermove', e => {
@@ -742,6 +751,7 @@ if (vaultSymbols && vaultScrollBar && vaultThumb) {
     vaultBarDragging = false;
     vaultScrollBar.classList.remove('scroll-bar--dragging');
     vaultScrollBar.releasePointerCapture(e.pointerId);
+    vaultSymbols.style.scrollSnapType = '';
   }
 
   vaultScrollBar.addEventListener('pointerup', endVaultBarDrag);

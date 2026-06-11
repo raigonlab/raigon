@@ -1674,26 +1674,36 @@ nav {
 }
 .collection-overlay-close:hover { color: rgba(232, 228, 220, 0.7); }
 
-/* Scrollable grid */
+/* Scrollable grid — 2-row carousel, swipe/scroll horizontally between columns */
 .collection-overlay-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  grid-auto-rows: min-content;
-  gap: 56px;
-  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  flex: none;
+  height: 460px;
+  margin: auto 0;
+  gap: 40px;
+  overflow-x: auto;
+  overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
-  touch-action: pan-y;
-  flex: 1;
-  min-height: 0;
-  align-content: start;
-  padding: 24px 14%;
-  padding-bottom: 48px;
+  touch-action: pan-x;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 0 14%;
+}
+
+.collection-overlay-grid::-webkit-scrollbar {
+  display: none;
 }
 
 /* Individual card */
 .collection-overlay-card {
   position: relative;
-  aspect-ratio: 1 / 1;
+  flex: none;
+  width: 160px;
+  height: 160px;
   background: #060810;
   cursor: pointer;
   border-radius: 8px;
@@ -1701,10 +1711,21 @@ nav {
   scroll-snap-align: start;
 }
 
-/* Position indicator — same draggable bar style as the vault carousel.
-   Hidden by default; only the mobile carousel layout uses it. */
+/* Stagger every other column downward so cards interlock in a
+   brick pattern instead of lining up in a rigid grid. */
+.collection-overlay-card:nth-child(4n+3),
+.collection-overlay-card:nth-child(4n+4) {
+  margin-top: 100px;
+}
+
+/* Position indicator — same draggable bar style as the vault carousel,
+   reused here to navigate the collection carousel horizontally. The
+   overlay spans the full viewport (vault's scene box is shorter), so
+   it needs extra bottom offset to land at the same height as the
+   vault page's bar. */
 .collection-overlay-scrollbar {
-  display: none;
+  display: block;
+  bottom: 78px;
 }
 
 .collection-overlay-card-img {
@@ -1757,7 +1778,19 @@ nav {
   }
 
   .collection-overlay-grid {
-    grid-template-columns: repeat(4, 1fr);
+    height: 373px;
+    gap: 32px;
+    padding: 0 8%;
+  }
+
+  .collection-overlay-card {
+    width: 130px;
+    height: 130px;
+  }
+
+  .collection-overlay-card:nth-child(4n+3),
+  .collection-overlay-card:nth-child(4n+4) {
+    margin-top: 81px;
   }
 }
 
@@ -2012,8 +2045,11 @@ nav {
     flex-direction: column;
     flex-wrap: wrap;
     align-content: flex-start;
+    flex: none;
+    height: 411px;
+    margin: auto 0;
     gap: 24px;
-    padding: 0 20px 110px;
+    padding: 0 20px;
     overflow-x: auto;
     overflow-y: hidden;
     scroll-snap-type: x mandatory;
@@ -2029,7 +2065,15 @@ nav {
 
   .collection-overlay-card {
     flex: none;
-    height: calc(25% - 18px);
+    width: 150px;
+    height: 150px;
+  }
+
+  /* Stagger every other column downward so cards interlock in a
+     brick pattern instead of lining up in a rigid grid. */
+  .collection-overlay-card:nth-child(4n+3),
+  .collection-overlay-card:nth-child(4n+4) {
+    margin-top: 87px;
   }
 
   .collection-overlay-scrollbar {
@@ -2037,7 +2081,7 @@ nav {
   }
 
   .scroll-bar.collection-overlay-scrollbar {
-    bottom: 90px;
+    bottom: 105px;
   }
 
   .collection-overlay-header {
