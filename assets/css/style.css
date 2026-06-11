@@ -60,7 +60,7 @@
     --surface:    #1c1916;
     --border:     rgba(196, 98, 45, 0.18);
     --text:       #e8e4dc;
-    --muted:      rgba(232, 228, 220, 0.4);
+    --muted:      rgba(232, 228, 220, 0.8);
     --accent:     #c4622d;
     --blue-dark:  #0d1520;
     --blue-mid:   #1a2a3a;
@@ -130,7 +130,7 @@ nav {
   }
    
   .nav-arrow {
-    font-size: 10px;
+    font-size: 11px;
     color: var(--muted);
     margin-bottom: 8px;
     letter-spacing: 2px;
@@ -161,9 +161,9 @@ nav {
     border-radius: 100px;
     border: none;
     background: transparent;
-    color: rgba(232, 228, 220, 0.35);
+    color: rgba(232, 228, 220, 0.8);
     font-family: 'Syne', sans-serif;
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 500;
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -285,7 +285,7 @@ nav {
 
   /* Year label — top right of header */
 .home-year {
-    font-size: 10px;
+    font-size: 11px;
     color: var(--muted);
     letter-spacing: 2px;
   }
@@ -461,10 +461,10 @@ nav {
     left: 50%;
     transform: translateX(-50%);
     font-family: 'Syne', sans-serif;
-    font-size: 9px;
+    font-size: 11px;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: rgba(232, 228, 220, 0.25);
+    color: rgba(232, 228, 220, 0.8);
     pointer-events: none;
     opacity: 0;
     animation: hintFade 6s ease 1s forwards;
@@ -634,11 +634,11 @@ nav {
     display: flex;
     align-items: center;
     gap: 8px;
-    font-size: 10px;
+    font-size: 11px;
     font-weight:500;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: rgba(232, 228, 220, 0.5);
+    color: rgba(232, 228, 220, 0.8);
     margin-bottom: 12px;
   }
 
@@ -658,7 +658,7 @@ nav {
   }
 
   .modal-year {
-    font-size: 10px;
+    font-size: 11px;
     letter-spacing: 3px;
     color: rgba(196, 98, 45, 0.65);
   }
@@ -674,22 +674,22 @@ nav {
     font-size: 14px;
     font-weight: 300;
     line-height: 1.7;
-    color: rgba(232, 228, 220, 0.5);
+    color: rgba(232, 228, 220, 0.8);
     font-style: italic;
   }
 
   .modal-counter {
     margin-top: 32px;
-    font-size: 9px;
+    font-size: 11px;
     letter-spacing: 2px;
-    color: rgba(232, 228, 220, 0.5);
+    color: rgba(232, 228, 220, 0.8);
     text-transform: uppercase;
   }
 
   /* Inquire link below description */
 .modal-inquire-link {
     margin-top: 28px;
-    font-size: 9px;
+    font-size: 11px;
     letter-spacing: 3px;
     text-transform: uppercase;
     color: rgba(232, 228, 220, 0.6);
@@ -709,10 +709,10 @@ nav {
 
   /* Inquire panel — back button */
 .modal-inquire-back {
-    font-size: 9px;
+    font-size: 11px;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: rgba(232, 228, 220, 0.5);
+    color: rgba(232, 228, 220, 0.8);
     background: none;
     border: none;
     padding: 0;
@@ -724,7 +724,7 @@ nav {
   .modal-inquire-back:hover { color: rgba(232, 228, 220, 0.85); }
 
 .modal-inquire-heading {
-    font-size: 10px;
+    font-size: 11px;
     letter-spacing: 4px;
     text-transform: uppercase;
     color: rgba(232, 228, 220, 0.6);
@@ -754,10 +754,10 @@ nav {
   }
 
 .modal-inquire-label {
-    font-size: 8px;
+    font-size: 11px;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: rgba(232, 228, 220, 0.52);
+    color: rgba(232, 228, 220, 0.8);
   }
 
 .modal-inquire-input {
@@ -800,7 +800,7 @@ nav {
 
 .modal-inquire-submit {
     margin-top: 6px;
-    font-size: 9px;
+    font-size: 11px;
     letter-spacing: 3px;
     text-transform: uppercase;
     color: rgba(232, 228, 220, 0.65);
@@ -950,10 +950,10 @@ nav {
 
 .collection-card-line {
     font-family: 'Syne', sans-serif;
-    font-size: 9px;
+    font-size: 11px;
     letter-spacing: 2px;
     text-transform: lowercase;
-    color: rgba(232, 228, 220, 0.4);
+    color: rgba(232, 228, 220, 0.8);
   }
 
 .collection-card-line + .collection-card-line {
@@ -964,7 +964,7 @@ nav {
 .collection-card-open {
     flex-shrink: 0;
     font-family: 'Syne', sans-serif;
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 500;
     letter-spacing: 2px;
     text-transform: lowercase;
@@ -989,7 +989,7 @@ nav {
   .collection-card--soon .collection-card-img { opacity: 0.5; }
 
 .collection-card-open--soon {
-    color: rgba(232, 228, 220, 0.35);
+    color: rgba(232, 228, 220, 0.6);
     border-color: rgba(232, 228, 220, 0.12);
   }
 
@@ -1000,10 +1000,10 @@ nav {
     left: 50%;
     transform: translateX(-50%);
     font-family: 'Syne', sans-serif;
-    font-size: 10px;
+    font-size: 11px;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: rgba(232, 228, 220, 0.4);
+    color: rgba(232, 228, 220, 0.8);
     text-align: center;
     pointer-events: none;
   }
@@ -1037,7 +1037,7 @@ nav {
 }
 
 .arquive-col-label {
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 4px;
   text-transform: uppercase;
   color: rgba(196, 98, 45, 0.6);
@@ -1071,7 +1071,7 @@ nav {
 .ar-row:hover { opacity: 0.6; }
 
 .ar-row-label {
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 3px;
   text-transform: uppercase;
   color: var(--muted);
@@ -1098,7 +1098,7 @@ nav {
 }
 
 .cf-label {
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 3px;
   text-transform: uppercase;
   color: var(--muted);
@@ -1134,7 +1134,7 @@ nav {
   padding: 9px 26px;
   color: rgba(232, 228, 220, 0.6);
   font-family: 'Syne', sans-serif;
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 3px;
   text-transform: uppercase;
   cursor: pointer;
@@ -1148,14 +1148,14 @@ nav {
 
 .arquive-address {
   margin-top: 20px;
-  font-size: 10px;
+  font-size: 11px;
   line-height: 1.8;
-  color: rgba(232, 228, 220, 0.35);
+  color: rgba(232, 228, 220, 0.8);
   letter-spacing: 0.5px;
 }
 
 .arquive-address-label {
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 3px;
   text-transform: uppercase;
   color: var(--muted);
@@ -1177,12 +1177,12 @@ nav {
 .event-title {
   font-size: 11px;
   letter-spacing: 2px;
-  color: rgba(232, 228, 220, 0.5);
+  color: rgba(232, 228, 220, 0.8);
   margin-bottom: 4px;
 }
 
 .event-meta {
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 3px;
   text-transform: uppercase;
   color: var(--muted);
@@ -1197,7 +1197,7 @@ nav {
 }
 
 .social-link {
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 3px;
   text-transform: uppercase;
   color: var(--muted);
@@ -1249,12 +1249,12 @@ nav {
   font-size: 12px;
   font-weight: 300;
   line-height: 1.85;
-  color: rgba(232, 228, 220, 0.55);
+  color: rgba(232, 228, 220, 0.8);
   margin-bottom: 20px;
 }
 
 .bio-role {
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 2px;
   text-transform: uppercase;
   color: rgba(196, 98, 45, 0.6);
@@ -1272,7 +1272,7 @@ nav {
   padding: 9px 26px;
   color: rgba(232, 228, 220, 0.6);
   font-family: 'Syne', sans-serif;
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 3px;
   text-transform: uppercase;
   cursor: pointer;
@@ -1373,7 +1373,7 @@ nav {
 }
 
 .bio-modal-role {
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 2px;
   text-transform: uppercase;
   color: var(--muted);
@@ -1385,7 +1385,7 @@ nav {
   font-size: 12px;
   font-weight: 300;
   line-height: 1.85;
-  color: rgba(232, 228, 220, 0.55);
+  color: rgba(232, 228, 220, 0.8);
 }
 
 .bio-modal-links {
@@ -1462,7 +1462,7 @@ nav {
 .field-error {
   display: block;
   font-family: 'Syne', sans-serif;
-  font-size: 8px;
+  font-size: 11px;
   letter-spacing: 2px;
   text-transform: uppercase;
   color: rgba(220, 90, 70, 0.85);
@@ -1544,11 +1544,11 @@ nav {
 
 .contact-success-message {
   font-family: 'Syne', sans-serif;
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 2px;
   text-transform: uppercase;
   line-height: 2.2;
-  color: rgba(232, 228, 220, 0.32);
+  color: rgba(232, 228, 220, 0.8);
 }
 
 /* ── Inquire panel success state ─────────────────────────────────────── */
@@ -1572,7 +1572,7 @@ nav {
 }
 
 .modal-inquire-success-label {
-  font-size: 8px;
+  font-size: 11px;
   letter-spacing: 4px;
   text-transform: uppercase;
   color: rgba(122, 168, 208, 0.6);
@@ -1590,7 +1590,7 @@ nav {
 }
 
 .modal-inquire-success-text {
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 2px;
   text-transform: uppercase;
   line-height: 2.2;
@@ -1646,7 +1646,7 @@ nav {
 
 .collection-overlay-count {
   font-family: 'Syne', sans-serif;
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 3px;
   text-transform: uppercase;
   color: rgba(196, 98, 45, 0.45);
@@ -1772,7 +1772,7 @@ nav {
 
   .pill {
     padding: 12px 12px;
-    font-size: 9px;
+    font-size: 11px;
     font-weight: 700;
     letter-spacing: 2.2px;
   }
@@ -1828,7 +1828,7 @@ nav {
   .modal-counter-img {
     display: block;
     font-family: 'Syne', sans-serif;
-    font-size: 10px;
+    font-size: 11px;
     letter-spacing: 3px;
     text-transform: uppercase;
     color: rgba(232, 228, 220, 0.9);
@@ -1844,7 +1844,7 @@ nav {
     width: 100%;
     text-align: center;
     color: rgba(232, 228, 220, 0.85);
-    font-size: 9px;
+    font-size: 11px;
   }
 
   .modal-side {
@@ -2021,7 +2021,7 @@ nav {
 .event-type-badge {
   display: inline-block;
   font-family: 'Syne', sans-serif;
-  font-size: 7px;
+  font-size: 11px;
   letter-spacing: 2.5px;
   text-transform: uppercase;
   color: rgba(196, 98, 45, 0.7);
@@ -2034,9 +2034,9 @@ nav {
 /* Event date line */
 .event-date {
   font-family: 'Syne', sans-serif;
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 2px;
-  color: rgba(232, 228, 220, 0.3);
+  color: rgba(232, 228, 220, 0.8);
   margin-top: 5px;
   margin-bottom: 10px;
 }
@@ -2045,10 +2045,10 @@ nav {
 .event-cal-btn {
   display: inline-block;
   font-family: 'Syne', sans-serif;
-  font-size: 8px;
+  font-size: 11px;
   letter-spacing: 2.5px;
   text-transform: uppercase;
-  color: rgba(232, 228, 220, 0.38);
+  color: rgba(232, 228, 220, 0.8);
   background: rgba(232, 228, 220, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 100px;
@@ -2065,17 +2065,17 @@ nav {
 /* Loading state */
 .events-loading {
   font-family: 'Syne', sans-serif;
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: rgba(232, 228, 220, 0.18);
+  color: rgba(232, 228, 220, 0.8);
   padding: 16px 0 8px;
 }
 
 /* Error state */
 .events-error {
   font-family: 'Syne', sans-serif;
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 2px;
   text-transform: uppercase;
   line-height: 2;
@@ -2145,7 +2145,7 @@ nav {
 
 .access-gate-label {
   font-family: 'Syne', sans-serif;
-  font-size: 8px;
+  font-size: 11px;
   letter-spacing: 5px;
   text-transform: uppercase;
   color: rgba(196, 98, 45, 0.65);
@@ -2177,7 +2177,7 @@ nav {
   border-bottom: 1px solid var(--border);
   color: var(--text);
   font-family: 'Syne', sans-serif;
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 4px;
   text-transform: uppercase;
   text-align: center;
@@ -2195,7 +2195,7 @@ nav {
 
 .access-gate-error {
   font-family: 'Syne', sans-serif;
-  font-size: 8px;
+  font-size: 11px;
   letter-spacing: 2px;
   text-transform: uppercase;
   color: rgba(220, 90, 70, 0.7);
@@ -2205,10 +2205,10 @@ nav {
 .access-gate-submit {
   margin-top: 8px;
   font-family: 'Syne', sans-serif;
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: rgba(232, 228, 220, 0.4);
+  color: rgba(232, 228, 220, 0.8);
   background: rgba(232, 228, 220, 0.04);
   border: 1px solid rgba(232, 228, 220, 0.2);
   border-radius: 100px;
@@ -2243,7 +2243,7 @@ nav {
   font-weight: 300;
   font-style: italic;
   line-height: 1.8;
-  color: rgba(232, 228, 220, 0.55);
+  color: rgba(232, 228, 220, 0.8);
   margin-bottom: 20px;
 }
 
@@ -2259,10 +2259,10 @@ nav {
 
 .access-gate-enter {
   font-family: 'Syne', sans-serif;
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: rgba(232, 228, 220, 0.4);
+  color: rgba(232, 228, 220, 0.8);
   background: rgba(232, 228, 220, 0.04);
   border: 1px solid rgba(232, 228, 220, 0.2);
   border-radius: 100px;
@@ -2320,19 +2320,19 @@ nav {
 
 .not-found-label {
   font-family: 'Syne', sans-serif;
-  font-size: 8px;
+  font-size: 11px;
   letter-spacing: 5px;
   text-transform: uppercase;
-  color: rgba(232, 228, 220, 0.25);
+  color: rgba(232, 228, 220, 0.8);
   margin-bottom: 28px;
 }
 
 .not-found-home {
   font-family: 'Syne', sans-serif;
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: rgba(232, 228, 220, 0.4);
+  color: rgba(232, 228, 220, 0.8);
   background: rgba(232, 228, 220, 0.05);
   border: 1px solid rgba(232, 228, 220, 0.2);
   border-radius: 100px;
