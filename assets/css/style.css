@@ -1692,6 +1692,13 @@ nav {
   cursor: pointer;
   border-radius: 8px;
   overflow: hidden;
+  scroll-snap-align: start;
+}
+
+/* Position indicator — same draggable bar style as the vault carousel.
+   Hidden by default; only the mobile carousel layout uses it. */
+.collection-overlay-scrollbar {
+  display: none;
 }
 
 .collection-overlay-card-img {
@@ -1953,8 +1960,42 @@ nav {
     padding: 10px 20px;
   }
 
+  /* Carousel layout — exactly 2 rows, swipe horizontally between columns */
+  .collection-overlay {
+    z-index: 90;
+  }
+
   .collection-overlay-grid {
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: 12px;
+    padding: 0 20px 110px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .collection-overlay-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .collection-overlay-card {
+    flex: none;
+    height: calc(50% - 6px);
+  }
+
+  .collection-overlay-scrollbar {
+    display: block;
+  }
+
+  .scroll-bar.collection-overlay-scrollbar {
+    bottom: 90px;
   }
 
   .collection-overlay-header {
@@ -1972,11 +2013,10 @@ nav {
     color: rgba(196, 98, 45, 1);
   }
 
+  /* Bottom nav stays visible above the overlay (z-index 90) and
+     doubles as the way back, so the close button is redundant. */
   .collection-overlay-close {
-    top: 24px;
-    right: 20px;
-    transform: none;
-    color: rgba(232, 228, 220, 1);
+    display: none;
   }
 
   /* Nav — almost full width */

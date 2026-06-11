@@ -519,6 +519,65 @@ function buildCollectionOverlay(collection) {
   overlay.appendChild(header);
   overlay.appendChild(grid);
 
+  /* Position indicator — same draggable bar as the vault carousel.
+     Only meaningful on mobile, where the grid becomes a horizontal
+     2-row carousel; hidden via CSS everywhere else. */
+  const overlayScrollBar = document.createElement('div');
+  overlayScrollBar.className = 'scroll-bar collection-overlay-scrollbar';
+
+  const overlayThumb = document.createElement('div');
+  overlayThumb.className = 'scroll-thumb';
+
+  overlayScrollBar.appendChild(overlayThumb);
+  overlay.appendChild(overlayScrollBar);
+
+  const OVERLAY_TRACK_WIDTH = 200;
+
+  function updateOverlayThumb() {
+    const maxScroll = grid.scrollWidth - grid.clientWidth;
+    const ratio     = Math.min(1, grid.clientWidth / grid.scrollWidth);
+    const thumbW    = Math.max(OVERLAY_TRACK_WIDTH * ratio, 30);
+    const progress  = maxScroll > 0 ? grid.scrollLeft / maxScroll : 0;
+
+    overlayScrollBar.style.display = maxScroll > 0 ? '' : 'none';
+    overlayThumb.style.width = thumbW.toFixed(1) + 'px';
+    overlayThumb.style.left  = (progress * (OVERLAY_TRACK_WIDTH - thumbW)).toFixed(1) + 'px';
+  }
+
+  grid.addEventListener('scroll', () => requestAnimationFrame(updateOverlayThumb));
+  window.addEventListener('resize', updateOverlayThumb);
+  requestAnimationFrame(() => requestAnimationFrame(updateOverlayThumb));
+
+  /* Drag the bar to scrub the grid left/right */
+  let overlayBarDragging = false;
+  let overlayBarLastX    = 0;
+
+  overlayScrollBar.addEventListener('pointerdown', e => {
+    overlayBarDragging = true;
+    overlayBarLastX    = e.clientX;
+    overlayScrollBar.classList.add('scroll-bar--dragging');
+    overlayScrollBar.setPointerCapture(e.pointerId);
+  });
+
+  overlayScrollBar.addEventListener('pointermove', e => {
+    if (!overlayBarDragging) { return; }
+    const dx = e.clientX - overlayBarLastX;
+    overlayBarLastX = e.clientX;
+
+    const maxScroll = grid.scrollWidth - grid.clientWidth;
+    grid.scrollLeft += dx * (maxScroll / OVERLAY_TRACK_WIDTH);
+  });
+
+  function endOverlayBarDrag(e) {
+    if (!overlayBarDragging) { return; }
+    overlayBarDragging = false;
+    overlayScrollBar.classList.remove('scroll-bar--dragging');
+    overlayScrollBar.releasePointerCapture(e.pointerId);
+  }
+
+  overlayScrollBar.addEventListener('pointerup', endOverlayBarDrag);
+  overlayScrollBar.addEventListener('pointercancel', endOverlayBarDrag);
+
   /* Close handlers: button, backdrop click, Escape key */
   function closeOverlay() {
     overlay.classList.remove('open');
