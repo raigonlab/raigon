@@ -1684,7 +1684,7 @@ nav {
   flex-wrap: wrap;
   align-content: flex-start;
   flex: none;
-  height: 384px;
+  height: 448px;
   margin: auto 0;
   gap: 128px;
   overflow-x: auto;
@@ -1706,7 +1706,7 @@ nav {
   position: relative;
   flex: none;
   width: 160px;
-  height: 160px;
+  height: 192px;
   background: #060810;
   cursor: pointer;
   border-radius: 8px;
@@ -1717,7 +1717,7 @@ nav {
 /* Drop every other card into the bottom row, zig-zagging the
    sequence so consecutive pieces don't line up in a rigid grid. */
 .collection-overlay-card:nth-child(even) {
-  margin-top: 224px;
+  margin-top: 256px;
 }
 
 /* Position indicator — same draggable bar style as the vault carousel,
@@ -2042,7 +2042,7 @@ nav {
     flex-wrap: wrap;
     align-content: flex-start;
     flex: none;
-    height: 360px;
+    height: 420px;
     margin: auto 0;
     gap: 120px;
     padding: 0 20px;
@@ -2062,13 +2062,13 @@ nav {
   .collection-overlay-card {
     flex: none;
     width: 150px;
-    height: 150px;
+    height: 180px;
   }
 
   /* Drop every other card into the bottom row, zig-zagging the
      sequence so consecutive pieces don't line up in a rigid grid. */
   .collection-overlay-card:nth-child(even) {
-    margin-top: 210px;
+    margin-top: 240px;
   }
 
   .collection-overlay-scrollbar {
