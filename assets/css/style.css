@@ -62,7 +62,6 @@
     --text:       #e8e4dc;
     --muted:      rgba(232, 228, 220, 0.8);
     --accent:     #c4622d;
-    --blue-dark:  #0d1520;
     --blue-mid:   #1a2a3a;
     --green:      #4a7c6a;
   }
@@ -992,7 +991,7 @@ nav {
     justify-content: space-between;
     gap: 16px;
     padding: 20px 22px;
-    background: var(--blue-dark);
+    background: var(--bg);
   }
 
 .collection-card-meta {
@@ -2147,20 +2146,23 @@ nav {
     color: rgba(196, 98, 45, 1);
   }
 
-  /* Nav — almost full width, shifted right to leave room for the
-     play/pause circle on the left. Only applies on Home (play/pause
-     button) or while a collection overlay is open (its scroll bar
-     occupies the same space) — toggled via body.nav-shift in script.js.
-     Other pages keep the default centered nav. */
-  body.nav-shift .nav-pills {
+  /* Nav — almost full width on every page, pills stretched evenly.
+     On Home (play/pause button) or while a collection overlay is open
+     (its scroll bar occupies the same spot), the bar is shifted right
+     to leave room on the left — toggled via body.nav-shift in
+     script.js. Other pages keep this same wide bar centered. */
+  .nav-pills {
     width: calc(100% - 102px);
-    margin-left: 62px;
     justify-content: space-between;
   }
 
-  body.nav-shift .pill {
+  .pill {
     flex: 1;
     justify-content: center;
+  }
+
+  body.nav-shift .nav-pills {
+    margin-left: 62px;
   }
 
   /* Gallery layers — cards 20% bigger, 30% less lateral gap */
