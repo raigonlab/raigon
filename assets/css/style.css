@@ -1049,13 +1049,13 @@ nav {
   font-size: 11px;
   letter-spacing: 4px;
   text-transform: uppercase;
-  color: rgba(196, 98, 45, 0.6);
+  color: rgba(196, 98, 45, 1);
   margin-bottom: 16px;
 }
 
 .arquive-card {
   background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--border);
+  border: 1px solid rgba(232, 228, 220, 0.2);
   border-radius: 12px;
   padding: 24px;
   display: flex;
