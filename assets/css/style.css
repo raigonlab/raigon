@@ -515,7 +515,7 @@ nav {
   }
 
 .scroll-bar--dragging .scroll-thumb {
-    background: rgba(232, 228, 220, 0.85);
+    background: rgba(80, 80, 79, 0.85);
   }
 
   /* Play/pause toggle for the auto-scroll, anchored left of the scroll bar */
@@ -2171,7 +2171,7 @@ nav {
   }
 
   .scroll-thumb {
-    height: 6px;
+    height: 4px;
   }
 
   /* Clean play/pause icon, no container, aligned with the nav bar on the left */
