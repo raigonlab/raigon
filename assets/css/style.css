@@ -521,7 +521,7 @@ nav {
   /* Play/pause toggle for the auto-scroll, anchored left of the scroll bar */
 .scroll-playpause {
     position: absolute;
-    bottom: 11px;
+    bottom: 42px;
     left: 28px;
     width: 20px;
     height: 16px;
@@ -540,9 +540,13 @@ nav {
     color: rgba(232, 228, 220, 0.85);
   }
 
-  /* Home gallery's bar sits left of center, beside the play/pause button */
+  /* Home gallery's bar sits left of center, beside the play/pause button.
+     It's appended to #home (not .home-scene) so bottom is measured
+     against the full page box and can align with the nav bar's middle
+     without being clipped by the scene's overflow. */
 .scroll-bar.home-scroll-bar {
     left: 58px;
+    bottom: 49px;
     transform: none;
   }
 
@@ -2125,9 +2129,11 @@ nav {
     color: rgba(196, 98, 45, 1);
   }
 
-  /* Nav — almost full width */
+  /* Nav — almost full width, shifted right to leave room for the
+     play/pause circle on the left */
   .nav-pills {
-    width: calc(100% - 40px);
+    width: calc(100% - 102px);
+    margin-left: 62px;
     justify-content: space-between;
   }
 
@@ -2156,14 +2162,30 @@ nav {
     height: 6px;
   }
 
-  /* Hidden on mobile until it gets its own placement pass */
+  /* Clean play/pause icon, no container, aligned with the nav bar on the left */
   .scroll-playpause {
-    display: none;
+    width: 50px;
+    height: 50px;
+    bottom: 28px;
+    left: 20px;
+    background: none;
+    border: none;
+    border-radius: 0;
   }
 
-  /* Restore centered position on mobile, matching the other scroll bars */
+  .scroll-playpause svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* Restore centered position on mobile, matching the other scroll bars.
+     Bottom is measured against #home's full-height box, so add back the
+     60px gap between #home and .home-scene to land in the same spot.
+     Width spans edge-to-edge of the play button + nav bar group below. */
   .scroll-bar.home-scroll-bar {
     left: 50%;
+    bottom: 105px;
+    width: calc(100% - 40px);
     transform: translateX(-50%);
   }
 }

@@ -242,7 +242,13 @@ window.addEventListener('load', () => {
   scrollThumb.className = 'scroll-thumb';
 
   scrollBar.appendChild(scrollThumb);
-  scene.appendChild(scrollBar);
+  /* Appended to #home (not .home-scene) so it can sit near the nav bar
+     without being clipped by the scene's overflow */
+  scene.parentElement.appendChild(scrollBar);
+
+  /* Distance the thumb can travel inside the bar — measured from the
+     actual rendered sizes so it stays correct across breakpoints */
+  const barTravel = scrollBar.offsetWidth - scrollThumb.offsetWidth;
 
   /* Play/pause toggle — stops the auto-scroll without affecting drag/parallax */
   const ICON_PAUSE = '<svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><rect x="3" y="2" width="3" height="12" rx="1"/><rect x="10" y="2" width="3" height="12" rx="1"/></svg>';
@@ -262,7 +268,7 @@ window.addEventListener('load', () => {
     playPauseBtn.setAttribute('aria-label', autoScrollPaused ? 'Resume auto-scroll' : 'Pause auto-scroll');
   });
 
-  scene.appendChild(playPauseBtn);
+  scene.parentElement.appendChild(playPauseBtn);
 
   /* Scroll-bar drag control — scrubbing the bar pushes the artworks left/right */
   let barDragging   = false;
@@ -287,7 +293,7 @@ window.addEventListener('load', () => {
     barLastX = e.clientX;
 
     const period = layers[0].scrollWidth / 3;
-    const scale  = period / 120;
+    const scale  = period / barTravel;
 
     layers.forEach((_, i) => {
       targetOffsets[i] -= dx * scale * (1 - i * 0.15);
@@ -387,7 +393,7 @@ window.addEventListener('load', () => {
     if (layers[0] && layers[0].scrollWidth > 0) {
       const period = layers[0].scrollWidth / 3;
       const pos    = ((-offsets[0] % period) + period) % period;
-      scrollThumb.style.left = ((pos / period) * 120).toFixed(1) + 'px';
+      scrollThumb.style.left = ((pos / period) * barTravel).toFixed(1) + 'px';
     }
 
     requestAnimationFrame(animate);
