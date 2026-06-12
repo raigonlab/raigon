@@ -933,8 +933,7 @@ nav {
     position: relative;
     display: flex;
     flex-direction: column;
-    width: 78%;
-    max-width: 360px;
+    width: min(66%, 306px, calc(100dvh - 250px));
     flex-shrink: 0;
     scroll-snap-align: center;
     cursor: pointer;
@@ -2069,7 +2068,7 @@ nav {
   }
 
   .collection-card {
-    width: 85%;
+    width: 72%;
   }
 
   .collection-card-footer {
