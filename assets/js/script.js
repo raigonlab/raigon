@@ -236,13 +236,33 @@ window.addEventListener('load', () => {
   scene.appendChild(hint);
 
   const scrollBar   = document.createElement('div');
-  scrollBar.className = 'scroll-bar';
+  scrollBar.className = 'scroll-bar home-scroll-bar';
 
   const scrollThumb = document.createElement('div');
   scrollThumb.className = 'scroll-thumb';
 
   scrollBar.appendChild(scrollThumb);
   scene.appendChild(scrollBar);
+
+  /* Play/pause toggle — stops the auto-scroll without affecting drag/parallax */
+  const ICON_PAUSE = '<svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><rect x="3" y="2" width="3" height="12" rx="1"/><rect x="10" y="2" width="3" height="12" rx="1"/></svg>';
+  const ICON_PLAY  = '<svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M4 2.5v11l9-5.5z"/></svg>';
+
+  let autoScrollPaused = false;
+
+  const playPauseBtn = document.createElement('button');
+  playPauseBtn.className   = 'scroll-playpause';
+  playPauseBtn.type        = 'button';
+  playPauseBtn.innerHTML   = ICON_PAUSE;
+  playPauseBtn.setAttribute('aria-label', 'Pause auto-scroll');
+
+  playPauseBtn.addEventListener('click', () => {
+    autoScrollPaused = !autoScrollPaused;
+    playPauseBtn.innerHTML = autoScrollPaused ? ICON_PLAY : ICON_PAUSE;
+    playPauseBtn.setAttribute('aria-label', autoScrollPaused ? 'Resume auto-scroll' : 'Pause auto-scroll');
+  });
+
+  scene.appendChild(playPauseBtn);
 
   /* Scroll-bar drag control — scrubbing the bar pushes the artworks left/right */
   let barDragging   = false;
@@ -267,7 +287,7 @@ window.addEventListener('load', () => {
     barLastX = e.clientX;
 
     const period = layers[0].scrollWidth / 3;
-    const scale  = period / 160;
+    const scale  = period / 120;
 
     layers.forEach((_, i) => {
       targetOffsets[i] -= dx * scale * (1 - i * 0.15);
@@ -335,9 +355,11 @@ window.addEventListener('load', () => {
 
   /* Main animation loop — auto-scroll, edge-scroll, and parallax */
   function animate() {
-    layers.forEach((_, i) => {
-      targetOffsets[i] -= 0.4;
-    });
+    if (!autoScrollPaused) {
+      layers.forEach((_, i) => {
+        targetOffsets[i] -= 0.4;
+      });
+    }
 
     const deadZone = 0.2;
     const absX     = Math.abs(mouseX);
@@ -365,7 +387,7 @@ window.addEventListener('load', () => {
     if (layers[0] && layers[0].scrollWidth > 0) {
       const period = layers[0].scrollWidth / 3;
       const pos    = ((-offsets[0] % period) + period) % period;
-      scrollThumb.style.left = ((pos / period) * 160).toFixed(1) + 'px';
+      scrollThumb.style.left = ((pos / period) * 120).toFixed(1) + 'px';
     }
 
     requestAnimationFrame(animate);

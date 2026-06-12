@@ -482,7 +482,7 @@ nav {
     bottom: 18px;
     left: 50%;
     transform: translateX(-50%);
-    width: 200px;
+    width: 150px;
     height: 2px;
     background: rgba(232, 228, 220, 0.18);
     border-radius: 2px;
@@ -507,7 +507,7 @@ nav {
     position: absolute;
     top: -1px;
     left: 0;
-    width: 40px;
+    width: 30px;
     height: 4px;
     background: rgba(232, 228, 220, 0.55);
     border-radius: 2px;
@@ -516,6 +516,34 @@ nav {
 
 .scroll-bar--dragging .scroll-thumb {
     background: rgba(232, 228, 220, 0.85);
+  }
+
+  /* Play/pause toggle for the auto-scroll, anchored left of the scroll bar */
+.scroll-playpause {
+    position: absolute;
+    bottom: 11px;
+    left: 28px;
+    width: 20px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    padding: 0;
+    color: rgba(232, 228, 220, 0.55);
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
+
+.scroll-playpause:hover {
+    color: rgba(232, 228, 220, 0.85);
+  }
+
+  /* Home gallery's bar sits left of center, beside the play/pause button */
+.scroll-bar.home-scroll-bar {
+    left: 58px;
+    transform: none;
   }
 
   /* ============================================================
@@ -2126,6 +2154,17 @@ nav {
 
   .scroll-thumb {
     height: 6px;
+  }
+
+  /* Hidden on mobile until it gets its own placement pass */
+  .scroll-playpause {
+    display: none;
+  }
+
+  /* Restore centered position on mobile, matching the other scroll bars */
+  .scroll-bar.home-scroll-bar {
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
 
