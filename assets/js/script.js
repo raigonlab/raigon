@@ -862,6 +862,17 @@ document.querySelectorAll('.collection-card').forEach(btn => {
   });
 });
 
+/* Collection cards are divs with role="button" — restore keyboard
+   activation (Enter/Space) for assistive tech users */
+document.querySelectorAll('.collection-card[role="button"]').forEach(card => {
+  card.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      card.click();
+    }
+  });
+});
+
 /* Scroll bar — same draggable indicator style as the home gallery,
    scrubbing it scrolls the horizontal collection row directly */
 const vaultSymbols   = document.querySelector('.vault-symbols');
