@@ -1209,34 +1209,56 @@ function resetInquirePanel() {
 
 
 /* ============================================================
-   BIO MODAL
-   Opens and closes the full bio overlay from the Arquive column.
+   BIO CARD EXPAND
+   Expands the bio card in place (same width, taller height) to
+   reveal the rest of the text, photo moving to the top.
 ============================================================ */
 (function () {
-  const overlay  = document.getElementById('bio-modal-overlay');
-  const openBtn  = document.getElementById('bio-open-btn');
-  const closeBtn = document.getElementById('bio-modal-close');
+  const card      = document.getElementById('bio-card');
+  const toggleBtn = document.getElementById('bio-open-btn');
+  const closeBtn  = document.getElementById('bio-card-close');
 
-  function openBioModal() {
-    overlay.setAttribute('aria-hidden', 'false');
-    overlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
+  let closedHeight = 0;
+
+  function setHeight(px) {
+    card.style.height = px + 'px';
   }
 
-  function closeBioModal() {
-    overlay.classList.remove('open');
-    overlay.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
+  function expandBio() {
+    closedHeight = card.getBoundingClientRect().height;
+    setHeight(closedHeight);
+    card.classList.add('expanded');
+    toggleBtn.textContent = 'Less';
+    toggleBtn.setAttribute('aria-expanded', 'true');
+
+    requestAnimationFrame(() => {
+      setHeight(card.scrollHeight);
+    });
   }
 
-  openBtn.addEventListener('click', openBioModal);
-  closeBtn.addEventListener('click', closeBioModal);
+  function collapseBio() {
+    setHeight(card.getBoundingClientRect().height);
+    card.classList.remove('expanded');
+    toggleBtn.textContent = 'More';
+    toggleBtn.setAttribute('aria-expanded', 'false');
 
-  overlay.addEventListener('click', e => {
-    if (e.target === overlay) { closeBioModal(); }
+    requestAnimationFrame(() => {
+      setHeight(closedHeight);
+    });
+  }
+
+  card.addEventListener('transitionend', e => {
+    if (e.propertyName !== 'height') return;
+    card.style.height = card.classList.contains('expanded') ? 'auto' : '';
   });
 
+  toggleBtn.addEventListener('click', () => {
+    card.classList.contains('expanded') ? collapseBio() : expandBio();
+  });
+
+  closeBtn.addEventListener('click', collapseBio);
+
   document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && overlay.classList.contains('open')) { closeBioModal(); }
+    if (e.key === 'Escape' && card.classList.contains('expanded')) { collapseBio(); }
   });
 })();
