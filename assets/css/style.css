@@ -1903,6 +1903,19 @@ nav {
   .collection-overlay--accord .collection-overlay-card:nth-child(even) {
     margin-top: 264px;
   }
+
+  /* Below 768px .nav-pills sits closer to center while the timeline
+     stays at left:58px — once the two get close enough the progress
+     bar runs underneath the pill bar. Lift the playback controls
+     clear of the nav bar. */
+  .scroll-bar.home-scroll-bar,
+  .scroll-bar.collection-overlay-scrollbar {
+    bottom: 90px;
+  }
+
+  .scroll-playpause {
+    bottom: 83px;
+  }
 }
 
 /* --- Mobile (480px) --- */
