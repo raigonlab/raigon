@@ -1035,7 +1035,8 @@ nav {
     background: rgba(196, 98, 45, 0.08);
   }
 
-  /* Coming soon card — visible but not interactive */
+  /* Coming soon card — visible but not interactive, aside from the
+     "remind me" calendar link in its footer */
 .collection-card--soon {
     cursor: default;
     pointer-events: none;
@@ -1043,9 +1044,19 @@ nav {
 
   .collection-card--soon .collection-card-img { opacity: 0.5; }
 
-.collection-card-open--soon {
+  /* Calendar link — re-enable pointer events for just this pill */
+.collection-card-cal-btn {
+    pointer-events: auto;
+    cursor: pointer;
     color: rgba(232, 228, 220, 0.6);
-    border-color: rgba(232, 228, 220, 0.12);
+    text-decoration: none;
+    transition: border-color 0.3s ease, background 0.3s ease, color 0.3s ease;
+  }
+
+  .collection-card-cal-btn:hover {
+    border-color: rgba(196, 98, 45, 0.4);
+    background: rgba(196, 98, 45, 0.08);
+    color: var(--text);
   }
 
   /* Feedback message area — shown on collection load or error */
