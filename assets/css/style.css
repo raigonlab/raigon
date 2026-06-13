@@ -466,8 +466,8 @@ nav {
     left: 50%;
     transform: translateX(-50%);
     font-family: 'Syne', sans-serif;
-    font-size: 11px;
-    letter-spacing: 3px;
+    font-size: 10px;
+    letter-spacing: 2px;
     text-transform: uppercase;
     color: rgba(91, 90, 87, 0.8);
     pointer-events: none;
@@ -2203,6 +2203,14 @@ nav {
 
   .scroll-thumb {
     height: 4px;
+  }
+
+  /* Vault & Arquive carousel bars — sized relative to the nav pill bar
+     (~20% narrower), so they never read wider than the nav itself and
+     scrub at the same width/height on both pages. */
+  #vault-scroll-bar,
+  .scroll-bar.arquive-scroll-bar {
+    width: calc((100% - 102px) * 0.8);
   }
 
   /* Clean play/pause icon, no container, aligned with the nav bar on the left */

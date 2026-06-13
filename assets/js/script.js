@@ -653,18 +653,17 @@ function buildCollectionOverlay(collection) {
 
   overlay.appendChild(playPauseBtn);
 
-  const OVERLAY_TRACK_WIDTH = 200;
-
   function updateOverlayThumb() {
-    const maxScroll = grid.scrollWidth - grid.clientWidth;
-    const ratio     = Math.min(1, grid.clientWidth / grid.scrollWidth);
-    const thumbW    = Math.max(OVERLAY_TRACK_WIDTH * ratio, 30);
-    const progress  = maxScroll > 0 ? grid.scrollLeft / maxScroll : 0;
+    const trackWidth = overlayScrollBar.clientWidth;
+    const maxScroll  = grid.scrollWidth - grid.clientWidth;
+    const ratio      = Math.min(1, grid.clientWidth / grid.scrollWidth);
+    const thumbW     = Math.max(trackWidth * ratio, 30);
+    const progress   = maxScroll > 0 ? grid.scrollLeft / maxScroll : 0;
 
     overlayScrollBar.style.display = maxScroll > 0 ? '' : 'none';
     playPauseBtn.style.display     = maxScroll > 0 ? '' : 'none';
     overlayThumb.style.width = thumbW.toFixed(1) + 'px';
-    overlayThumb.style.left  = (progress * (OVERLAY_TRACK_WIDTH - thumbW)).toFixed(1) + 'px';
+    overlayThumb.style.left  = (progress * (trackWidth - thumbW)).toFixed(1) + 'px';
   }
 
   grid.addEventListener('scroll', () => requestAnimationFrame(updateOverlayThumb));
@@ -692,7 +691,7 @@ function buildCollectionOverlay(collection) {
     overlayBarLastX = e.clientX;
 
     const maxScroll = grid.scrollWidth - grid.clientWidth;
-    grid.scrollLeft += dx * (maxScroll / OVERLAY_TRACK_WIDTH);
+    grid.scrollLeft += dx * (maxScroll / overlayScrollBar.clientWidth);
   });
 
   function endOverlayBarDrag(e) {
@@ -809,16 +808,15 @@ const vaultScrollBar = document.getElementById('vault-scroll-bar');
 const vaultThumb     = vaultScrollBar?.querySelector('.scroll-thumb');
 
 if (vaultSymbols && vaultScrollBar && vaultThumb) {
-  const VAULT_TRACK_WIDTH = 200;
-
   function updateVaultThumb() {
-    const maxScroll = vaultSymbols.scrollWidth - vaultSymbols.clientWidth;
-    const ratio     = Math.min(1, vaultSymbols.clientWidth / vaultSymbols.scrollWidth);
-    const thumbW    = Math.max(VAULT_TRACK_WIDTH * ratio, 30);
-    const progress  = maxScroll > 0 ? vaultSymbols.scrollLeft / maxScroll : 0;
+    const trackWidth = vaultScrollBar.clientWidth;
+    const maxScroll  = vaultSymbols.scrollWidth - vaultSymbols.clientWidth;
+    const ratio      = Math.min(1, vaultSymbols.clientWidth / vaultSymbols.scrollWidth);
+    const thumbW     = Math.max(trackWidth * ratio, 30);
+    const progress   = maxScroll > 0 ? vaultSymbols.scrollLeft / maxScroll : 0;
 
     vaultThumb.style.width = thumbW.toFixed(1) + 'px';
-    vaultThumb.style.left  = (progress * (VAULT_TRACK_WIDTH - thumbW)).toFixed(1) + 'px';
+    vaultThumb.style.left  = (progress * (trackWidth - thumbW)).toFixed(1) + 'px';
   }
 
   vaultSymbols.addEventListener('scroll', () => requestAnimationFrame(updateVaultThumb));
@@ -846,7 +844,7 @@ if (vaultSymbols && vaultScrollBar && vaultThumb) {
     vaultBarLastX = e.clientX;
 
     const maxScroll = vaultSymbols.scrollWidth - vaultSymbols.clientWidth;
-    vaultSymbols.scrollLeft += dx * (maxScroll / VAULT_TRACK_WIDTH);
+    vaultSymbols.scrollLeft += dx * (maxScroll / vaultScrollBar.clientWidth);
   });
 
   function endVaultBarDrag(e) {
@@ -883,16 +881,15 @@ const arquiveScrollBar = document.getElementById('arquive-scroll-bar');
 const arquiveThumb     = arquiveScrollBar?.querySelector('.scroll-thumb');
 
 if (arquiveGrid && arquiveScrollBar && arquiveThumb) {
-  const ARQUIVE_TRACK_WIDTH = 200;
-
   function updateArquiveThumb() {
-    const maxScroll = arquiveGrid.scrollWidth - arquiveGrid.clientWidth;
-    const ratio     = Math.min(1, arquiveGrid.clientWidth / arquiveGrid.scrollWidth);
-    const thumbW    = Math.max(ARQUIVE_TRACK_WIDTH * ratio, 30);
-    const progress  = maxScroll > 0 ? arquiveGrid.scrollLeft / maxScroll : 0;
+    const trackWidth = arquiveScrollBar.clientWidth;
+    const maxScroll  = arquiveGrid.scrollWidth - arquiveGrid.clientWidth;
+    const ratio      = Math.min(1, arquiveGrid.clientWidth / arquiveGrid.scrollWidth);
+    const thumbW     = Math.max(trackWidth * ratio, 30);
+    const progress   = maxScroll > 0 ? arquiveGrid.scrollLeft / maxScroll : 0;
 
     arquiveThumb.style.width = thumbW.toFixed(1) + 'px';
-    arquiveThumb.style.left  = (progress * (ARQUIVE_TRACK_WIDTH - thumbW)).toFixed(1) + 'px';
+    arquiveThumb.style.left  = (progress * (trackWidth - thumbW)).toFixed(1) + 'px';
   }
 
   arquiveGrid.addEventListener('scroll', () => requestAnimationFrame(updateArquiveThumb));
@@ -917,7 +914,7 @@ if (arquiveGrid && arquiveScrollBar && arquiveThumb) {
     arquiveBarLastX = e.clientX;
 
     const maxScroll = arquiveGrid.scrollWidth - arquiveGrid.clientWidth;
-    arquiveGrid.scrollLeft += dx * (maxScroll / ARQUIVE_TRACK_WIDTH);
+    arquiveGrid.scrollLeft += dx * (maxScroll / arquiveScrollBar.clientWidth);
   });
 
   function endArquiveBarDrag(e) {
