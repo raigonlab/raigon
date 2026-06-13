@@ -158,77 +158,68 @@
 
   <!-- ============================================================
     ARQUIVE SECTION
-    Two-column layout: (bio + next event) · contact
+    Vertical stack: bio · next event · contact, plus a footer line
   ============================================================ -->
   <div class="page" id="arquive">
     <div class="arquive-wrap">
 
-      <!-- Two-column grid -->
-      <div class="arquive-grid">
+      <!-- Card stack -->
+      <div class="arquive-stack">
 
-        <!-- Column 1: Bio + Next Event -->
-        <div class="arquive-col">
-          <div class="arquive-col-label">bio</div>
-          <div class="arquive-card">
-            <div class="bio-photo">
-              <img src="assets/images/rai-profile.jpg" alt="Railson Viana" class="bio-photo-img">
-            </div>
+        <!-- Bio -->
+        <div class="arquive-card arquive-card--bio">
+          <div class="arquive-card-body">
+            <div class="arquive-card-title">Bio</div>
+            <div class="arquive-card-subtitle">Artist · Tattooist · Designer · Zürich</div>
             <p class="bio-text">
               He develops work at the intersection of art, form, and digital systems.
               His practice explores structure, rhythm, and visual language through
               abstraction and continuous flow, treating the body as a canvas for
               conceptual composition.
             </p>
-            <div class="bio-role">Artist · Tattooist · Designer · Zürich</div>
-            <button class="bio-learn-more" id="bio-open-btn">Learn More</button>
+            <button class="arquive-pill-btn" id="bio-open-btn">More</button>
           </div>
-
-          <!-- Next Event — blocks populated by loadEvents() in script.js -->
-          <div class="arquive-col-label arquive-col-label--stacked">next event</div>
-          <div class="arquive-card">
-            <div id="events-list"></div>
-            <div class="arquive-socials">
-              <a href="https://youtube.com/@raigon" target="_blank" rel="noopener noreferrer" class="social-link">Youtube</a>
-              <a href="https://instagram.com/raigon.art" target="_blank" rel="noopener noreferrer" class="social-link">@raigon.art</a>
-            </div>
+          <div class="arquive-card-photo">
+            <img src="assets/images/rai-profile.jpg" alt="Railson Viana" class="bio-photo-img">
           </div>
         </div>
 
-        <!-- Column 2: Get in Touch -->
-        <div class="arquive-col">
-          <div class="arquive-col-label">get in touch</div>
-          <div class="arquive-card">
-            <form class="contact-form" action="#" onsubmit="return false;">
-              <div class="cf-field">
-                <label class="cf-label" for="cf-name">Name</label>
-                <input class="cf-input" type="text" id="cf-name" name="name" placeholder="Your name" autocomplete="name">
-              </div>
-              <div class="cf-field">
-                <label class="cf-label" for="cf-email">Email</label>
-                <input class="cf-input" type="email" id="cf-email" name="email" placeholder="your@email.com" autocomplete="email">
-              </div>
-              <div class="cf-field">
-                <label class="cf-label" for="cf-phone">Phone</label>
-                <input class="cf-input" type="tel" id="cf-phone" name="phone" placeholder="+41 00 000 00 00" autocomplete="tel">
-              </div>
-              <div class="cf-field">
-                <label class="cf-label" for="cf-message">Message</label>
-                <textarea class="cf-input cf-textarea" id="cf-message" name="message" placeholder="Your message..."></textarea>
-              </div>
-              <button class="cf-submit" type="submit">Send</button>
-            </form>
-            <div class="arquive-address">
-              <div class="arquive-address-label">Address</div>
-              <div>Zürich, Switzerland</div>
-              <div class="arquive-address-sep"></div>
-              <div>create@raigonlab.com</div>
-              <div>+41 79 635 43 99</div>
-            </div>
-          </div>
+        <!-- Next Event — block populated by loadEvents() in script.js -->
+        <div class="arquive-card arquive-card--events">
+          <div class="arquive-card-title">Events</div>
+          <div id="events-list"></div>
+        </div>
+
+        <!-- Let's Talk -->
+        <div class="arquive-card arquive-card--contact">
+          <div class="arquive-card-title">Let's Talk</div>
+          <form class="contact-form" action="#" onsubmit="return false;">
+            <input class="cf-input" type="text" id="cf-name" name="name" placeholder="Your name" autocomplete="name" aria-label="Name">
+            <input class="cf-input" type="email" id="cf-email" name="email" placeholder="your@email.com" autocomplete="email" aria-label="Email">
+            <textarea class="cf-input cf-textarea" id="cf-message" name="message" placeholder="Message" aria-label="Message"></textarea>
+            <button class="arquive-pill-btn" type="submit">Send</button>
+          </form>
         </div>
 
       </div>
-      <!-- End two-column grid -->
+      <!-- End card stack -->
+
+      <!-- Footer: brand, contact details, Instagram -->
+      <div class="arquive-footer">
+        <div class="arquive-footer-info">
+          <div class="arquive-footer-brand">RAIGON TM 2026</div>
+          <div>create@raigonlab.com</div>
+          <div>+41 79 635 43 99</div>
+          <div>Zürich - Switzerland</div>
+        </div>
+        <a href="https://instagram.com/raigon.art" target="_blank" rel="noopener noreferrer" class="arquive-footer-instagram" aria-label="Instagram">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2" y="2" width="20" height="20" rx="5"/>
+            <circle cx="12" cy="12" r="4"/>
+            <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/>
+          </svg>
+        </a>
+      </div>
 
       <!-- Bio modal overlay -->
       <div class="bio-modal-overlay" id="bio-modal-overlay" aria-hidden="true">
@@ -262,10 +253,6 @@
         </div>
       </div>
 
-    </div>
-
-    <div class="scroll-bar arquive-scroll-bar" id="arquive-scroll-bar">
-      <div class="scroll-thumb"></div>
     </div>
 
   </div>
@@ -362,14 +349,14 @@
     HTML skeletons cloned at runtime by script.js — never rendered directly.
   ============================================================ -->
 
-  <!-- Event block — cloned once per event by loadEvents() -->
+  <!-- Event block — cloned once for the next event by loadEvents() -->
   <template id="event-block-tpl">
     <div class="event-block">
-      <span class="event-type-badge"></span>
-      <div class="event-title"></div>
-      <div class="event-meta"></div>
-      <div class="event-date"></div>
-      <a class="event-cal-btn" target="_blank" rel="noopener noreferrer">Add to Calendar</a>
+      <div class="event-block-info">
+        <div class="event-title"></div>
+        <div class="event-meta"></div>
+      </div>
+      <a class="event-cal-btn" target="_blank" rel="noopener noreferrer">Add</a>
     </div>
   </template>
 

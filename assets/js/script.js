@@ -859,76 +859,6 @@ if (vaultSymbols && vaultScrollBar && vaultThumb) {
   vaultScrollBar.addEventListener('pointercancel', endVaultBarDrag);
 }
 
-/* Mouse wheel scrolls the Arquive carousel horizontally, so desktop
-   users without a horizontal-scroll gesture can reach every card. */
-const arquiveGrid = document.querySelector('.arquive-grid');
-
-if (arquiveGrid) {
-  let arquiveWheelSettleTimer = null;
-  arquiveGrid.addEventListener('wheel', e => {
-    if (e.deltaY === 0) { return; }
-    e.preventDefault();
-    arquiveGrid.style.scrollSnapType = 'none';
-    arquiveGrid.scrollLeft += e.deltaY;
-    clearTimeout(arquiveWheelSettleTimer);
-    arquiveWheelSettleTimer = setTimeout(() => { arquiveGrid.style.scrollSnapType = ''; }, 150);
-  }, { passive: false });
-}
-
-/* Scroll bar — same draggable indicator style as the vault carousel,
-   scrubbing it scrolls the Arquive column row directly */
-const arquiveScrollBar = document.getElementById('arquive-scroll-bar');
-const arquiveThumb     = arquiveScrollBar?.querySelector('.scroll-thumb');
-
-if (arquiveGrid && arquiveScrollBar && arquiveThumb) {
-  function updateArquiveThumb() {
-    const trackWidth = arquiveScrollBar.clientWidth;
-    const maxScroll  = arquiveGrid.scrollWidth - arquiveGrid.clientWidth;
-    const ratio      = Math.min(1, arquiveGrid.clientWidth / arquiveGrid.scrollWidth);
-    const thumbW     = Math.max(trackWidth * ratio, 30);
-    const progress   = maxScroll > 0 ? arquiveGrid.scrollLeft / maxScroll : 0;
-
-    arquiveThumb.style.width = thumbW.toFixed(1) + 'px';
-    arquiveThumb.style.left  = (progress * (trackWidth - thumbW)).toFixed(1) + 'px';
-  }
-
-  arquiveGrid.addEventListener('scroll', () => requestAnimationFrame(updateArquiveThumb));
-  window.addEventListener('resize', updateArquiveThumb);
-  updateArquiveThumb();
-
-  /* Drag the bar to scrub the Arquive row left/right */
-  let arquiveBarDragging = false;
-  let arquiveBarLastX    = 0;
-
-  arquiveScrollBar.addEventListener('pointerdown', e => {
-    arquiveBarDragging = true;
-    arquiveBarLastX    = e.clientX;
-    arquiveScrollBar.classList.add('scroll-bar--dragging');
-    arquiveScrollBar.setPointerCapture(e.pointerId);
-    arquiveGrid.style.scrollSnapType = 'none';
-  });
-
-  arquiveScrollBar.addEventListener('pointermove', e => {
-    if (!arquiveBarDragging) { return; }
-    const dx = e.clientX - arquiveBarLastX;
-    arquiveBarLastX = e.clientX;
-
-    const maxScroll = arquiveGrid.scrollWidth - arquiveGrid.clientWidth;
-    arquiveGrid.scrollLeft += dx * (maxScroll / arquiveScrollBar.clientWidth);
-  });
-
-  function endArquiveBarDrag(e) {
-    if (!arquiveBarDragging) { return; }
-    arquiveBarDragging = false;
-    arquiveScrollBar.classList.remove('scroll-bar--dragging');
-    arquiveScrollBar.releasePointerCapture(e.pointerId);
-    arquiveGrid.style.scrollSnapType = '';
-  }
-
-  arquiveScrollBar.addEventListener('pointerup', endArquiveBarDrag);
-  arquiveScrollBar.addEventListener('pointercancel', endArquiveBarDrag);
-}
-
 /* ============================================================
    ACCORD ACCESS GATE
 ============================================================ */
@@ -996,7 +926,7 @@ accessGateEnter.addEventListener('click', () => {
 /* ============================================================
    ARQUIVE — EVENTS
    Fetches upcoming events from data/events.json and renders
-   the next two into the events column, keeping it compact.
+   the next one into the events column, keeping it compact.
    Called automatically the first time Arquive becomes active.
 ============================================================ */
 
@@ -1044,11 +974,9 @@ function cloneTpl(id) {
 function buildEventBlock(event) {
   const block = cloneTpl('event-block-tpl');
 
-  block.querySelector('.event-type-badge').textContent = event.type;
-  block.querySelector('.event-title').textContent      = event.title;
-  block.querySelector('.event-meta').textContent       = `${event.venue} · ${event.city}`;
-  block.querySelector('.event-date').textContent       = formatEventDate(event.dateStart, event.dateEnd);
-  block.querySelector('.event-cal-btn').href           = buildCalendarUrl(event);
+  block.querySelector('.event-title').textContent = event.title;
+  block.querySelector('.event-meta').textContent   = `${formatEventDate(event.dateStart, event.dateEnd)} · ${event.city}`;
+  block.querySelector('.event-cal-btn').href       = buildCalendarUrl(event);
 
   return block;
 }
@@ -1081,7 +1009,7 @@ async function loadEvents() {
     }
 
     list.innerHTML = '';
-    data.events.slice(0, 2).forEach(event => list.appendChild(buildEventBlock(event)));
+    list.appendChild(buildEventBlock(data.events[0]));
     eventsLoaded = true;
 
   } catch (error) {
@@ -1100,7 +1028,7 @@ async function loadEvents() {
 /* ============================================================
    FORM VALIDATION
    Covers two forms:
-     1. Arquive contact form  (#cf-name, #cf-email, #cf-phone, #cf-message)
+     1. Arquive contact form  (#cf-name, #cf-email, #cf-message)
      2. Modal inquire form    (#inquire-name-input, #inquire-email-input,
                                #inquire-message-input)
 
@@ -1195,7 +1123,6 @@ function resetInquirePanel() {
 
   const cfName    = document.getElementById('cf-name');
   const cfEmail   = document.getElementById('cf-email');
-  const cfPhone   = document.getElementById('cf-phone');
   const cfMessage = document.getElementById('cf-message');
 
   const nameRules = [
@@ -1205,9 +1132,6 @@ function resetInquirePanel() {
     { test: v => v.length > 0,       message: 'Email is required.' },
     { test: v => EMAIL_REGEX.test(v), message: 'Please enter a valid email address.' },
   ];
-  const phoneRules = [
-    { test: v => v.length > 0, message: 'Phone number is required.' },
-  ];
   const messageRules = [
     { test: v => v.length > 0, message: 'Message is required.' },
   ];
@@ -1215,7 +1139,6 @@ function resetInquirePanel() {
   /* Clear errors as the user corrects each field */
   attachLiveValidation(cfName,    nameRules);
   attachLiveValidation(cfEmail,   emailRules);
-  attachLiveValidation(cfPhone,   phoneRules);
   attachLiveValidation(cfMessage, messageRules);
 
   form.addEventListener('submit', e => {
@@ -1225,7 +1148,6 @@ function resetInquirePanel() {
     const isValid = [
       validateField(cfName,    nameRules),
       validateField(cfEmail,   emailRules),
-      validateField(cfPhone,   phoneRules),
       validateField(cfMessage, messageRules),
     ].every(Boolean);
 
