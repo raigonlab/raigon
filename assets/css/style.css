@@ -1070,8 +1070,7 @@ nav {
 
 .arquive-wrap {
   max-width: 1100px;
-  margin: 0 auto;
-  padding: 170px 32px 120px;
+  padding: 170px 32px 120px 28px;
 }
 
 
@@ -1092,10 +1091,18 @@ nav {
   display: none;
 }
 
+/* Position indicator — same draggable bar style as the vault carousel and
+   collection overlay, reused here to scrub the Arquive columns. #arquive
+   spans the full viewport (like the overlay), so it needs the same extra
+   bottom offset to land at the same height as the vault page's bar. */
+.arquive-scroll-bar {
+  bottom: 78px;
+}
+
 .arquive-col {
   display: flex;
   flex-direction: column;
-  flex: 0 0 min(360px, 85vw);
+  flex: 0 0 min(324px, 76.5vw);
   scroll-snap-align: start;
 }
 
@@ -2128,6 +2135,10 @@ nav {
   }
 
   .scroll-bar.collection-overlay-scrollbar {
+    bottom: 105px;
+  }
+
+  .scroll-bar.arquive-scroll-bar {
     bottom: 105px;
   }
 

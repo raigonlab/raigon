@@ -877,6 +877,61 @@ if (arquiveGrid) {
   }, { passive: false });
 }
 
+/* Scroll bar — same draggable indicator style as the vault carousel,
+   scrubbing it scrolls the Arquive column row directly */
+const arquiveScrollBar = document.getElementById('arquive-scroll-bar');
+const arquiveThumb     = arquiveScrollBar?.querySelector('.scroll-thumb');
+
+if (arquiveGrid && arquiveScrollBar && arquiveThumb) {
+  const ARQUIVE_TRACK_WIDTH = 200;
+
+  function updateArquiveThumb() {
+    const maxScroll = arquiveGrid.scrollWidth - arquiveGrid.clientWidth;
+    const ratio     = Math.min(1, arquiveGrid.clientWidth / arquiveGrid.scrollWidth);
+    const thumbW    = Math.max(ARQUIVE_TRACK_WIDTH * ratio, 30);
+    const progress  = maxScroll > 0 ? arquiveGrid.scrollLeft / maxScroll : 0;
+
+    arquiveThumb.style.width = thumbW.toFixed(1) + 'px';
+    arquiveThumb.style.left  = (progress * (ARQUIVE_TRACK_WIDTH - thumbW)).toFixed(1) + 'px';
+  }
+
+  arquiveGrid.addEventListener('scroll', () => requestAnimationFrame(updateArquiveThumb));
+  window.addEventListener('resize', updateArquiveThumb);
+  updateArquiveThumb();
+
+  /* Drag the bar to scrub the Arquive row left/right */
+  let arquiveBarDragging = false;
+  let arquiveBarLastX    = 0;
+
+  arquiveScrollBar.addEventListener('pointerdown', e => {
+    arquiveBarDragging = true;
+    arquiveBarLastX    = e.clientX;
+    arquiveScrollBar.classList.add('scroll-bar--dragging');
+    arquiveScrollBar.setPointerCapture(e.pointerId);
+    arquiveGrid.style.scrollSnapType = 'none';
+  });
+
+  arquiveScrollBar.addEventListener('pointermove', e => {
+    if (!arquiveBarDragging) { return; }
+    const dx = e.clientX - arquiveBarLastX;
+    arquiveBarLastX = e.clientX;
+
+    const maxScroll = arquiveGrid.scrollWidth - arquiveGrid.clientWidth;
+    arquiveGrid.scrollLeft += dx * (maxScroll / ARQUIVE_TRACK_WIDTH);
+  });
+
+  function endArquiveBarDrag(e) {
+    if (!arquiveBarDragging) { return; }
+    arquiveBarDragging = false;
+    arquiveScrollBar.classList.remove('scroll-bar--dragging');
+    arquiveScrollBar.releasePointerCapture(e.pointerId);
+    arquiveGrid.style.scrollSnapType = '';
+  }
+
+  arquiveScrollBar.addEventListener('pointerup', endArquiveBarDrag);
+  arquiveScrollBar.addEventListener('pointercancel', endArquiveBarDrag);
+}
+
 /* ============================================================
    E-MOTION ACCESS GATE
 ============================================================ */
