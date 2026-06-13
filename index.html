@@ -158,15 +158,15 @@
 
   <!-- ============================================================
     ARQUIVE SECTION
-    Three-column layout: bio · events · contact
+    Two-column layout: (bio + next event) · contact
   ============================================================ -->
   <div class="page" id="arquive">
     <div class="arquive-wrap">
 
-      <!-- Three-column grid -->
+      <!-- Two-column grid -->
       <div class="arquive-grid">
 
-        <!-- Column 1: Bio -->
+        <!-- Column 1: Bio + Next Event -->
         <div class="arquive-col">
           <div class="arquive-col-label">bio</div>
           <div class="arquive-card">
@@ -182,11 +182,9 @@
             <div class="bio-role">Artist · Tattooist · Designer · Zürich</div>
             <button class="bio-learn-more" id="bio-open-btn">Learn More</button>
           </div>
-        </div>
 
-        <!-- Column 2: Next Event — blocks populated by loadEvents() in script.js -->
-        <div class="arquive-col">
-          <div class="arquive-col-label">next event</div>
+          <!-- Next Event — blocks populated by loadEvents() in script.js -->
+          <div class="arquive-col-label arquive-col-label--stacked">next event</div>
           <div class="arquive-card">
             <div id="events-list"></div>
             <div class="arquive-socials">
@@ -196,7 +194,7 @@
           </div>
         </div>
 
-        <!-- Column 3: Get in Touch -->
+        <!-- Column 2: Get in Touch -->
         <div class="arquive-col">
           <div class="arquive-col-label">get in touch</div>
           <div class="arquive-card">
@@ -230,7 +228,7 @@
         </div>
 
       </div>
-      <!-- End three-column grid -->
+      <!-- End two-column grid -->
 
       <!-- Bio modal overlay -->
       <div class="bio-modal-overlay" id="bio-modal-overlay" aria-hidden="true">

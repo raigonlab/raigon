@@ -996,7 +996,7 @@ accessGateEnter.addEventListener('click', () => {
 /* ============================================================
    ARQUIVE — EVENTS
    Fetches upcoming events from data/events.json and renders
-   them dynamically into the events column.
+   the next two into the events column, keeping it compact.
    Called automatically the first time Arquive becomes active.
 ============================================================ */
 
@@ -1081,7 +1081,7 @@ async function loadEvents() {
     }
 
     list.innerHTML = '';
-    data.events.forEach(event => list.appendChild(buildEventBlock(event)));
+    data.events.slice(0, 2).forEach(event => list.appendChild(buildEventBlock(event)));
     eventsLoaded = true;
 
   } catch (error) {

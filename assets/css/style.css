@@ -1078,11 +1078,12 @@ nav {
 }
 
 
-  /* Horizontal carousel — one card (bio / next event / get in touch)
-     per snap point, on every breakpoint */
+  /* Horizontal carousel — one column (bio + next event / get in touch)
+     per snap point, on every breakpoint. Columns size to their own
+     content rather than stretching to match each other. */
 .arquive-grid {
   display: flex;
-  align-items: stretch;
+  align-items: flex-start;
   gap: 24px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
@@ -1118,6 +1119,11 @@ nav {
   margin-bottom: 16px;
 }
 
+/* Second label stacked below the bio card in the same column */
+.arquive-col-label--stacked {
+  margin-top: 28px;
+}
+
 .arquive-card {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(232, 228, 220, 0.2);
@@ -1126,7 +1132,6 @@ nav {
   display: flex;
   flex-direction: column;
   gap: 0;
-  flex: 1;
 }
 
 /* Contact rows inside get-in-touch card */
