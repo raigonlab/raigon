@@ -2522,3 +2522,22 @@ nav {
   border-color: rgba(122, 168, 208, 0.28);
   background: rgba(122, 168, 208, 0.05);
 }
+
+/* iOS Safari auto-zooms the page when a focused input/textarea has
+   font-size below 16px — bump these to 16px on touch breakpoints
+   to prevent that zoom from firing. */
+@media (max-width: 768px) {
+  .modal-inquire-input,
+  .modal-inquire-textarea,
+  .cf-input,
+  .access-gate-input {
+    font-size: 16px;
+  }
+
+  /* The access-gate placeholder is too wide for its field at 16px with
+     the wide letter-spacing — shrink the placeholder only, the input
+     itself (and anything typed into it) stays at 16px. */
+  .access-gate-input::placeholder {
+    font-size: 11px;
+  }
+}
