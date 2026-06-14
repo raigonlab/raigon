@@ -1,29 +1,33 @@
-# [raigon-mmxi](https://raigonlab.github.io/raigon-mmxi)
+# [raigon](https://raigonlab.github.io/raigon)
 
 Developer: Railson Goncalves ([raigonlab](https://www.github.com/raigonlab))
 
-[![GitHub commit activity](https://img.shields.io/github/commit-activity/t/raigonlab/raigon-mmxi)](https://www.github.com/raigonlab/raigon-mmxi/commits/main)
-[![GitHub last commit](https://img.shields.io/github/last-commit/raigonlab/raigon-mmxi)](https://www.github.com/raigonlab/raigon-mmxi/commits/main)
-[![GitHub repo size](https://img.shields.io/github/repo-size/raigonlab/raigon-mmxi)](https://www.github.com/raigonlab/raigon-mmxi)
-[![badge](https://img.shields.io/badge/deployment-GitHub_Pages-purple)](https://raigonlab.github.io/raigon-mmxi)
+[![GitHub commit activity](https://img.shields.io/github/commit-activity/t/raigonlab/raigon)](https://www.github.com/raigonlab/raigon/commits/main)
+[![GitHub last commit](https://img.shields.io/github/last-commit/raigonlab/raigon)](https://www.github.com/raigonlab/raigon/commits/main)
+[![GitHub repo size](https://img.shields.io/github/repo-size/raigonlab/raigon)](https://www.github.com/raigonlab/raigon)
+[![badge](https://img.shields.io/badge/deployment-GitHub_Pages-purple)](https://raigonlab.github.io/raigon)
 
 ---
 
 ## Project Introduction and Rationale
 
-raigon-mmxi is an interactive digital art gallery built to showcase the original artwork of Raigon, a Zürich-based artist and tattooist working at the intersection of art, body, and technology. The project presents the *Carvão Digital* series — nineteen original digital works — through an immersive, user-controlled experience.
+raigon is an interactive digital art gallery presenting the original works of Raigon, a Zürich-based artist and tattooist. The target audience includes art collectors interested in acquiring or commissioning work, and fellow artists and creatives who engage with the work conceptually. The site is built as a single-page application using HTML, CSS, and JavaScript, with no external frameworks or libraries.
 
-The target audience includes art collectors and clients interested in acquiring or commissioning work, as well as fellow artists and creatives who engage with the work conceptually. The site prioritises the artwork itself, using a minimal dark interface so the pieces remain the focal point.
+The project is structured around two levels of access: a public gallery open to all visitors, and a private, invitation-only space for the *Accord* collection, protected by an access code gate. Acquisition happens through curated contact forms and direct artist–collector communication, not a traditional e-commerce flow.
 
-The rationale behind this project was to build something that reflects the quality of the work it presents. As an artist and designer, I wanted the experience of browsing the gallery to feel as considered as the artwork itself. This meant building custom interactions — infinite parallax scroll, depth-of-field focus effects, animated canvas backgrounds — rather than relying on off-the-shelf components. The project uses the Fetch API to load collection data asynchronously, demonstrating real-world async patterns with proper error handling.
+The site currently presents two collections — *Carvão Digital* and *Accord* — with a third marked as coming soon. The Arquive section lists upcoming events loaded asynchronously from a local JSON file, and a contact form with custom validation allows visitors to reach the artist directly.
 
-#### [You can check the Live Here!](https://raigonlab.github.io/raigon-mmxi)
+The key technical decisions were: a single-page architecture with hash-based routing so back/forward navigation works natively; the Fetch API with `async/await` and `try/catch` for event data loading, keeping the UI responsive while the request resolves; and all interactivity built without frameworks to demonstrate direct control over the DOM and browser APIs.
+
+The long-term vision is to evolve this system into a framework that other independent artists can use to present and manage their work online, reducing dependence on traditional platforms.
+
+#### [Live site →](https://raigonlab.github.io/raigon)
 
 ---
 
-![raigon-mmxi responsive mockup](documentation/responsive_design.png)
+![raigon responsive mockup](documentation/responsive_design.png)
 
-source: https://ui.dev/amiresponsive?url=https://raigonlab.github.io/raigon-mmxi
+*source: https://ui.dev/amiresponsive?url=https://raigonlab.github.io/raigon*
 
 ---
 
@@ -35,20 +39,23 @@ source: https://ui.dev/amiresponsive?url=https://raigonlab.github.io/raigon-mmxi
 
 **Purpose**
 
-* Present original digital artwork in an immersive, interactive gallery
-* Allow users to explore curated collections and contact the artist
+- Present original digital artwork in an immersive, contemplative gallery
+- Provide differentiated access: a public exhibition and a private, invitation-only space for collectors
+- Support a personal acquisition flow through curated forms and direct artist–collector communication
+- Allow users to explore collections and contact the artist directly
 
 **Primary User Needs**
 
-* Browse and view artwork with full detail
-* Understand the artist's visual identity and body of work
-* Find contact information easily
+- Browse and view artwork with full detail
+- Understand the artist's visual identity and body of work
+- Find contact information easily
 
 **Business Goals**
 
-* Attract collectors and commission inquiries
-* Establish a strong, distinct visual identity online
-* Demonstrate technical and design craftsmanship
+- Attract collectors and commission inquiries through a personal acquisition flow
+- Establish a strong, distinct visual identity online
+- Validate the portfolio experience as a first phase toward a broader framework for independent artists
+- Demonstrate technical and design craftsmanship
 
 ---
 
@@ -56,18 +63,20 @@ source: https://ui.dev/amiresponsive?url=https://raigonlab.github.io/raigon-mmxi
 
 **Features**
 
-* Infinite parallax gallery with depth-of-field effect
-* Full-screen artwork modal with keyboard navigation
-* Animated topographic canvas (Vault section)
-* Curated collections loaded via async fetch
-* Artist biography and contact section
-* Custom 404 page with automatic redirect
+- Infinite parallax gallery with depth-of-field effect
+- Full-screen artwork modal with keyboard navigation
+- Accord collection with access code gate
+- Curated collections loaded from inline data
+- Upcoming events loaded via async fetch with loading and error states
+- Two validated forms: contact and artwork inquiry
+- Artist biography with expandable content
+- Custom 404 page with automatic redirect
 
 **Content Requirements**
 
-* Original artwork images with title, series, year, and description
-* Artist biography
-* Contact and social media links
+- Original artwork images with title, series, year, and description
+- Artist biography
+- Contact and social media links
 
 ---
 
@@ -75,9 +84,10 @@ source: https://ui.dev/amiresponsive?url=https://raigonlab.github.io/raigon-mmxi
 
 **Information Architecture**
 
-* Single-page application with three sections: Home, Vault, Arquive
-* Persistent bottom navigation pill bar
-* No page reloads — all transitions are JavaScript-driven
+- Single-page application with three sections: Home, Vault, Arquive
+- Hash-based routing — URL updates on navigation so back/forward buttons work natively
+- Persistent bottom navigation pill bar
+- No page reloads — all transitions are JavaScript-driven
 
 **User Flow Desktop**
 
@@ -129,32 +139,34 @@ Wireframes were created before development began, covering both mobile and deskt
 
 **Visual Design**
 
-* Minimal dark interface — near-black backgrounds with warm gold accent (`#c8a96e`)
-* Editorial typography pairing: Cormorant Garamond (serif) for artwork information, Syne (geometric sans) for UI labels
-* Artwork is always the visual priority — interface elements are intentionally subdued
+- Minimal dark interface — near-black backgrounds with warm accent (`#c4622d`)
+- Editorial typography pairing: Cormorant Garamond (serif) for artwork information, Syne (geometric sans) for UI labels
+- Artwork is always the visual priority — interface elements are intentionally subdued
 
 ---
 
 ## Colour Scheme
 
-* Dark, editorial scheme centred on the artwork:
+Dark, editorial scheme centred on the artwork:
 
-* Background: `#05040a`
-* Surface: `#111110`
-* Accent: `#c8a96e`
-* Text: `#e8e4dc`
-* Muted: `rgba(232,228,220,0.4)`
+| Token | Value |
+| ----- | ----- |
+| Background | `#0a0907` |
+| Surface | `#1c1916` |
+| Accent | `#c4622d` |
+| Text | `#e8e4dc` |
+| Muted | `rgba(232,228,220,0.4)` |
 
 Clean, minimal, and designed to frame artwork without competing with it.
 
-![raigon-mmxi Colour Scheme](documentation/colour-scheme.png)
+![raigon Colour Scheme](documentation/colour-scheme.png)
 
 ---
 
 ## Typography
 
-* **Cormorant Garamond** — used for artwork titles, descriptions, and editorial content. Sourced from Google Fonts.
-* **Syne** — used for navigation labels, section headers, and UI elements. Sourced from Google Fonts.
+- **Cormorant Garamond** — used for artwork titles, descriptions, and editorial content. Sourced from Google Fonts.
+- **Syne** — used for navigation labels, section headers, and UI elements. Sourced from Google Fonts.
 
 The pairing creates a clear visual hierarchy: Cormorant Garamond carries the artistic voice, Syne handles the interface.
 
@@ -162,7 +174,7 @@ The pairing creates a clear visual hierarchy: Cormorant Garamond carries the art
 
 ## Wireframes
 
-Wireframes were created to define layout and structure across devices before any code was written.
+Wireframes were created using Figma to define layout and structure across devices before any code was written. The process started with low-fidelity sketches focused on content placement and user flow, then moved to more defined layouts covering both mobile and desktop breakpoints.
 
 | Screen | Wireframe |
 | ------ | --------- |
@@ -180,6 +192,7 @@ Wireframes were created to define layout and structure across devices before any
 | As an art collector | I want to browse artwork in a visually immersive gallery | So I can evaluate pieces for acquisition |
 | As an art collector | I want to view an artwork in full detail | So I can see the title, series, year, and description |
 | As an art collector | I want to navigate between artworks without closing the viewer | So my browsing flow is uninterrupted |
+| As an art collector | I want to inquire about acquiring a piece through direct contact | So I can begin a personal conversation with the artist |
 | As a creative / peer artist | I want to understand the artist's visual language | So I can engage meaningfully with the work |
 | As a creative / peer artist | I want to explore curated collections by theme | So I can discover conceptual groupings |
 | As a site visitor | I want to find contact information easily | So I can get in touch or follow on social media |
@@ -195,38 +208,44 @@ Wireframes were created to define layout and structure across devices before any
 
 | Feature | Description |
 | ------- | ----------- |
-| Parallax Gallery | Two-layer infinite horizontal scroll with auto-scroll, drag, and mouse-edge scroll |
-| Depth-of-field Effect | Central artwork cards are sharp; edges blur and fade progressively |
+| Parallax Gallery | Three-layer infinite horizontal scroll with auto-scroll, drag, mouse-edge scroll, and play/pause control |
+| Depth-of-field Effect | Cards blur, fade, and scale based on distance from screen centre, calculated per animation frame |
 | Artwork Modal | Full-screen viewer with title, series, year, description, and prev/next navigation |
 | Keyboard Navigation | Arrow keys navigate between artworks; Escape closes the modal |
-| Topographic Canvas | Animated noise-curve canvas in the Vault section, reactive to mouse position |
-| Async Collections | Collection data loaded via Fetch API with loading and error states |
-| Arquive / Contact | Artist biography and contact links, all external links open in a new tab |
-| 404 Page | Custom error page with automatic redirect to homepage after 5 seconds |
-| Favicon | Branding element |
+| Swipe Navigation | Swipe left/right on mobile to browse artworks inside the modal |
+| Inquire Form | Inline acquisition form inside the modal with field validation and success state |
+| Vault Collections | Two collections (*Carvão Digital* and *Accord*) plus a coming-soon card with calendar link |
+| Accord Access Gate | Invitation-only collection protected by an access code, with error feedback and two-step success flow |
+| Async Event Loading | Upcoming events fetched from `data/events.json` with loading indicator and error state |
+| Google Calendar Link | Event data used to generate an Add to Calendar link via `URLSearchParams` |
+| Contact Form | Validated contact form with inline field errors and a success overlay on submission |
+| Hash Routing | URL hash updates on navigation; browser back/forward buttons work without page reloads |
+| Bio Card | Expandable artist biography with animated height transition |
+| 404 Page | Custom error page with automatic redirect to homepage |
+| Favicon | SVG and PNG branding elements |
 
 ---
 
 ### Future Features
 
-* Search and filter for the gallery
-* Individual collection gallery views (Pyramid, Shell, Lake)
-* Commission inquiry form with validation
+- Search and filter for the gallery
+- Individual collection gallery views
+- Private collector portal with persistent access
+- Framework expansion to support other independent artists
 
 ---
 
 ## Tools & Technologies
 
-* HTML5
-* CSS3
-* JavaScript (ES6+)
-* Canvas API
-* Fetch API
-* Git & GitHub
-* GitHub Pages
-* Figma
-* Google Fonts
-* ChatGPT / Claude
+- HTML5
+- CSS3
+- JavaScript (ES6+)
+- Fetch API
+- Git & GitHub
+- GitHub Pages
+- Figma
+- Google Fonts
+- ChatGPT / Claude
 
 ---
 
@@ -250,15 +269,34 @@ All testing details are available in:
 
 ### Live Website
 
-- The site was deployed to GitHub Pages. The steps to deploy are as follows:
-  - In the GitHub repository, navigate to the Settings tab
-  - From the Code and automation section drop-down menu, select Pages
-  - In the build and deployment area, choose from source "deploy from a branch" and then choose the main branch, root folder, and save
-  - Once saved, the page will be automatically refreshed with a ribbon confirming successful deployment (it can take around 5 minutes for the link to appear)
+The site was deployed to GitHub Pages. The steps to deploy are as follows:
 
-Live link: https://raigonlab.github.io/raigon-mmxi
+1. In the GitHub repository, navigate to the **Settings** tab
+2. From the **Code and automation** section drop-down menu, select **Pages**
+3. In the build and deployment area, choose from source **"deploy from a branch"** and then choose the **main** branch, **root** folder, and save
+4. Once saved, the page will be automatically refreshed with a ribbon confirming successful deployment (it can take around 5 minutes for the link to appear)
 
-> **Note:** the `fetch()` call for collection data requires a server context. When running locally, use a local server such as the VS Code Live Server extension or `python -m http.server` rather than opening `index.html` directly in the browser.
+**Live link:** https://raigonlab.github.io/raigon
+
+### Local Development
+
+To run the project locally:
+
+1. Clone the repository:
+   ```
+   git clone https://github.com/raigonlab/raigon.git
+   ```
+2. Navigate into the project folder:
+   ```
+   cd raigon
+   ```
+3. Start a local server — either with the VS Code Live Server extension, or via terminal:
+   ```
+   python -m http.server
+   ```
+4. Open `http://localhost:8000` in your browser.
+
+> **Note:** opening `index.html` directly via `file://` will cause a CORS error that blocks the `fetch()` call for event data. A local server is required.
 
 ---
 
@@ -266,22 +304,24 @@ Live link: https://raigonlab.github.io/raigon-mmxi
 
 ### Content
 
-* MDN Web Docs — Canvas API and Fetch API reference
-* Code Institute materials
-* ChatGPT / Claude (debugging & explanations)
-* Fonts.google.com
-
----
+- [MDN Web Docs](https://developer.mozilla.org/) — Fetch API and DOM reference
+- Code Institute materials
+- Claude — coding assistant for debugging and project support
+- ChatGPT — debugging and explanations
+- Gemini — image generation
+- [fonts.google.com](https://fonts.google.com)
+- [fireship.dev](https://fireship.dev) — JavaScript reference and tutorials
+- [tinypng.com](https://tinypng.com) — image compression
 
 ### Media
 
-* All artwork images are original works by Raigon (© Raigon Lab, MMXXIII)
-* Logo and symbol images are original works by Raigon
+- All artwork pieces by Railson Gonçalves (© Raigon Lab, MMXXIII)
+- Logo and symbol images are original works by Raigon
 
 ---
 
 ## Acknowledgements
 
-Special thanks to my mentor for guidance and support throughout the project.
+Special thanks to my mentor Tim Nelson for his guidance and support throughout the project, and to Tindy and Fernando Gonçalves for all their support.
 
 ---
